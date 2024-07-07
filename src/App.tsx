@@ -1,5 +1,5 @@
 import React from 'react';
-import useMainRouter from './router/useMainRouter';
+import useMainRouter from '@router/useMainRouter';
 
 function App() {
   const router = useMainRouter();

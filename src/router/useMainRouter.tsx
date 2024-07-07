@@ -1,8 +1,8 @@
 import { useRoutes } from 'react-router-dom';
-import Home from '../pages/Home/Home';
-import About from '../pages/About/About';
-import NotFound from '../pages/NotFound/NotFound';
-import AdminLayout from '../components/Layout/AdminLayout';
+import Home from '@pages/Home/Home';
+import About from '@pages/About/About';
+import NotFound from '@pages/NotFound/NotFound';
+import AdminLayout from '@components/Layout/AdminLayout';
 
 const useMainRouter = () =>
   useRoutes([
