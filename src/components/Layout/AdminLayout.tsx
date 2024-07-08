@@ -7,7 +7,7 @@ import Container from '@components/Layout/Container/Container';
 
 const AdminLayout = () => {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div>
       <Header />
       <Container>
         <Outlet />
