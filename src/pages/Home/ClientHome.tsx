@@ -1,5 +1,12 @@
+import PageTitle from '@components/Typography/PageTitle';
+
 const ClientHome = () => {
-  return <div className=""></div>;
+  return (
+    <>
+      <PageTitle title="Dashboard" />
+      <div className=""></div>
+    </>
+  );
 };
 
 export default ClientHome;

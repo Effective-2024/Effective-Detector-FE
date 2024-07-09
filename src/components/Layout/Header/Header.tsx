@@ -2,6 +2,7 @@ import { ReactComponent as Logo } from '@assets/logo/logo.svg';
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '@lib/hooks/redux';
 import { logout } from '@store/member.slice';
+import { FaUserCircle } from 'react-icons/fa';
 
 const categories = [
   { title: '병실 관리', url: '/ward' },
@@ -27,12 +28,19 @@ const Header = () => {
         </div>
       )}
       {member.isAuth ? (
-        <button
-          onClick={() => dispatch(logout())}
-          className="font-bold text-comment"
-        >
-          로그아웃
-        </button>
+        <div className="flex gap-4">
+          <Link to="/my" className="flex gap-1">
+            <FaUserCircle className="h-6 w-6 text-comment" />
+            {!member.isModerator && member.name}
+          </Link>
+          <div className="border-l border-comment" />
+          <button
+            onClick={() => dispatch(logout())}
+            className="font-bold text-comment"
+          >
+            로그아웃
+          </button>
+        </div>
       ) : (
         <Link to="/login" className="font-bold text-comment">
           로그인

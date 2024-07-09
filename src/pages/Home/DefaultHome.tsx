@@ -4,7 +4,7 @@ import HomeSection from '@components/DefaultHome/HomeSection';
 
 const DefaultHome = () => {
   return (
-    <div className="">
+    <>
       <div className="text-xl">
         <p>우리 병실의 안전사고 지킴이,</p>
         <p className="font-bold">Safe Catcher</p>
@@ -42,7 +42,7 @@ const DefaultHome = () => {
           imagePosition="left"
         />
       </div>
-    </div>
+    </>
   );
 };
 
