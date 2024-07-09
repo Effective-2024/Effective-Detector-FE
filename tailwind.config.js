@@ -34,6 +34,9 @@ module.exports = {
       width: {
         sign: '500px',
       },
+      maxWidth: {
+        sign: '500px',
+      },
     },
   },
   plugins: [],
