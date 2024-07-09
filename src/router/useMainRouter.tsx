@@ -1,18 +1,18 @@
 import { useRoutes } from 'react-router-dom';
 import Home from '@pages/Home/Home';
-import About from '@pages/About/About';
+import Login from '@pages/Login/Login';
 import NotFound from '@pages/NotFound/NotFound';
-import AdminLayout from '@components/Layout/AdminLayout';
+import Layout from '@components/Layout/Layout';
 
 const useMainRouter = () =>
   useRoutes([
     {
-      path: '/admin',
-      element: <AdminLayout />,
+      path: '/',
+      element: <Layout />,
       children: [
         { index: true, element: <Home /> },
         { path: '*', element: <NotFound /> },
-        { path: 'about', element: <About /> },
+        { path: 'login', element: <Login /> },
       ],
     },
   ]);

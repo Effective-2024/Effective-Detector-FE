@@ -5,7 +5,7 @@ import Header from '@components/Layout/Header/Header';
 import Footer from '@components/Layout/Footer/Footer';
 import Container from '@components/Layout/Container/Container';
 
-const AdminLayout = () => {
+const Layout = () => {
   return (
     <div>
       <Header />
@@ -17,4 +17,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default Layout;
