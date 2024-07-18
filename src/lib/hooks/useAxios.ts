@@ -8,12 +8,12 @@ import {
 import { AxiosError } from 'axios';
 import { useEffect } from 'react';
 
+import { redirect, useLocation } from 'react-router-dom';
 import {
+  UnauthorizedError,
   AccessDeniedError,
   BusinessError,
-  UnauthorizedError,
-} from '@types/error';
-import { redirect, useLocation } from 'react-router-dom';
+} from '~/types/error';
 
 const handleError = (error: Error, pathname: string) => {
   if (error instanceof UnauthorizedError) {

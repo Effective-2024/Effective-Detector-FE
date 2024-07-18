@@ -9,7 +9,9 @@
       "@router/*": ["./router/*"],
       "@pages/*": ["./pages/*"],
       "@store/*": ["./store/*"],
-      "@types/*": ["./types/*"]
+      "@types/*": ["./types/*"],
+      "@data/*": ["./data/*"],
+      "baseUrl": "src"
     }
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import useMainRouter from '@router/useMainRouter';
 import ReduxProvider from '@lib/utils/reduxProvider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import ReactQueryProvider from './lib/utils/queryProvider';
 
 function App() {
   const router = useMainRouter();
@@ -20,9 +21,11 @@ function App() {
   });
   return (
     <ThemeProvider theme={theme}>
-      <ReduxProvider>
-        <div className="font-pretendard">{router}</div>
-      </ReduxProvider>
+      <ReactQueryProvider>
+        <ReduxProvider>
+          <div className="font-pretendard">{router}</div>
+        </ReduxProvider>
+      </ReactQueryProvider>
     </ThemeProvider>
   );
 }

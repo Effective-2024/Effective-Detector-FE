@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { categorizeError } from '@types/error';
+import { categorizeError } from '~/types/error';
 
 export const client = axios.create({
   baseURL: process.env.SERVER_URL,

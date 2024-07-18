@@ -1,3 +1,5 @@
+import { HospitalType } from './hospital';
+
 export type Role = 'ROLE_병원_관리자' | 'ROLE_서비스_관리자' | 'ROLE_비로그인';
 
 export interface MemberInfo {
@@ -8,4 +10,17 @@ export interface MemberInfo {
   thumbnailPath: string | null;
   generation: string;
   memberRoles: Role[];
+}
+
+export interface ExistMemberId {
+  isExistMemberId: boolean;
+}
+
+export interface MemberCreateDto {
+  id: string;
+  password: string;
+  hospitalId: number;
+  hospitalType: HospitalType;
+  managerName: string;
+  managerPhoneNumber: string;
 }
