@@ -18,7 +18,7 @@ import { useExistMemberIdQuery, useMemberCreate } from '@lib/hooks/useApi';
 import { HospitalType } from '~/types/hospital';
 import HospitalSearchModal from '~/components/Modal/HospitalSearchModal';
 
-interface Hospital {
+export interface Hospital {
   id: number;
   name: string;
 }
@@ -48,7 +48,7 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
     hospital: { id: 0, name: '' },
-    hospitalType: HospitalType.GENERAL_HOSPITAL,
+    hospitalType: HospitalType.HOSPITAL,
     managerName: '',
     managerPhoneNumber: '',
   };
@@ -236,18 +236,9 @@ const SignUp = () => {
                           touched.hospitalType && Boolean(errors.hospitalType)
                         }
                       >
-                        <MenuItem value={HospitalType.GENERAL_HOSPITAL}>
-                          {HospitalType.GENERAL_HOSPITAL}
-                        </MenuItem>
-                        <MenuItem value={HospitalType.NURSING_HOME}>
-                          {HospitalType.NURSING_HOME}
-                        </MenuItem>
-                        <MenuItem value={HospitalType.UNIVERSITY_HOSPITAL}>
-                          {HospitalType.UNIVERSITY_HOSPITAL}
-                        </MenuItem>
-                        <MenuItem value={HospitalType.WELFARE_FACILITY}>
-                          {HospitalType.WELFARE_FACILITY}
-                        </MenuItem>
+                        {Object.values(HospitalType).map((type) => (
+                          <MenuItem value={type}>{type}</MenuItem>
+                        ))}
                       </Select>
                       {touched.hospitalType && errors.hospitalType && (
                         <Typography color="error">

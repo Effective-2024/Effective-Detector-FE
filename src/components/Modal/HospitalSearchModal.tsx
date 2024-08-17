@@ -1,7 +1,7 @@
 import { VscClose } from 'react-icons/vsc';
 import PageTitle from '../Typography/PageTitle';
 import { FormikErrors } from 'formik';
-import { SignUpInfo } from '~/pages/SignUp/SignUp';
+import { Hospital, SignUpInfo } from '~/pages/SignUp/SignUp';
 import { TextField } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { HospitalDto } from '~/types/common.dto';
@@ -79,7 +79,10 @@ const HospitalSearchModal = ({
                     <button
                       type="button"
                       onClick={() => {
-                        setFieldValue('hospital', hospital);
+                        setFieldValue('hospital', {
+                          id: hospital.id,
+                          name: hospital.name,
+                        } as Hospital);
                         setOpen(false);
                       }}
                     >

@@ -27,5 +27,8 @@ export interface MemberCreateDto {
 
 export interface HospitalDto {
   id: number;
-  name: string;
+  name?: string;
+  type?: HospitalType;
+  address?: string;
+  tel?: string;
 }
