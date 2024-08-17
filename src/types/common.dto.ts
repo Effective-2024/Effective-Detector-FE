@@ -24,3 +24,8 @@ export interface MemberCreateDto {
   managerName: string;
   managerPhoneNumber: string;
 }
+
+export interface HospitalDto {
+  id: number;
+  name: string;
+}
