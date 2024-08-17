@@ -5,24 +5,25 @@ import { Hospital, SignUpInfo } from '~/pages/SignUp/SignUp';
 import { TextField } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { HospitalDto } from '~/types/common.dto';
+import { HospitalType } from '~/types/hospital';
 
 const hospitals: HospitalDto[] = [
-  { id: 1, name: '병원1' },
-  { id: 2, name: '병원2' },
-  { id: 3, name: '병원3' },
-  { id: 4, name: '병원4' },
-  { id: 5, name: '병원1' },
-  { id: 6, name: '병원2' },
-  { id: 7, name: '병원3' },
-  { id: 8, name: '병원4' },
-  { id: 9, name: '병원1' },
-  { id: 10, name: '병원2' },
-  { id: 11, name: '병원3' },
-  { id: 12, name: '병원4' },
-  { id: 13, name: '병원1' },
-  { id: 14, name: '병원2' },
-  { id: 15, name: '병원3' },
-  { id: 16, name: '병원4' },
+  { id: 1, name: '병원1', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 2, name: '병원2', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 3, name: '병원3', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 4, name: '병원4', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 5, name: '병원1', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 6, name: '병원2', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 7, name: '병원3', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 8, name: '병원4', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 9, name: '병원1', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 10, name: '병원2', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 11, name: '병원3', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 12, name: '병원4', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 13, name: '병원1', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 14, name: '병원2', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 15, name: '병원3', type: HospitalType.DENTISTRY_HOSPITAL },
+  { id: 16, name: '병원4', type: HospitalType.DENTISTRY_HOSPITAL },
 ];
 
 interface HospitalSearchModalProps {
@@ -82,6 +83,7 @@ const HospitalSearchModal = ({
                         setFieldValue('hospital', {
                           id: hospital.id,
                           name: hospital.name,
+                          type: hospital.type,
                         } as Hospital);
                         setOpen(false);
                       }}

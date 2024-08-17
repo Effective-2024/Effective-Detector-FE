@@ -32,10 +32,9 @@ export const useLogout = () =>
     },
   });
 
-export const useExistMemberIdQuery = (loginId: string) =>
-  useAxiosQuery({
-    queryKey: QueryKeys.EXIST_MEMBER_ID(loginId),
-    queryFn: async (): Promise<ExistMemberId | null> => {
+export const useExistMemberIdQuery = () =>
+  useAxiosMutation({
+    mutationFn: async (loginId: string): Promise<ExistMemberId | null> => {
       const response = await client.get(`/auth/login-id/${loginId}`);
       return response.data;
     },

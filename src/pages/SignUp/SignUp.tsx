@@ -1,18 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Logo } from '@assets/logo/logo.svg';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Formik, Form, useField, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { FaSearch } from 'react-icons/fa';
 import { useExistMemberIdQuery, useMemberCreate } from '@lib/hooks/useApi';
 import { HospitalType } from '~/types/hospital';
@@ -21,6 +12,7 @@ import HospitalSearchModal from '~/components/Modal/HospitalSearchModal';
 export interface Hospital {
   id: number;
   name: string;
+  type: HospitalType;
 }
 
 export interface SignUpInfo {
@@ -28,7 +20,6 @@ export interface SignUpInfo {
   password: string;
   confirmPassword: string;
   hospital: Hospital;
-  hospitalType: HospitalType;
   managerName: string;
   managerPhoneNumber: string;
 }
@@ -47,8 +38,7 @@ const SignUp = () => {
     id: '',
     password: '',
     confirmPassword: '',
-    hospital: { id: 0, name: '' },
-    hospitalType: HospitalType.HOSPITAL,
+    hospital: { id: 0, name: '', type: HospitalType.HOSPITAL },
     managerName: '',
     managerPhoneNumber: '',
   };
@@ -74,12 +64,11 @@ const SignUp = () => {
   ) => {
     createMember(
       {
-        id: values.id,
-        password: values.password,
+        loginId: values.id,
+        loginPassword: values.password,
         hospitalId: values.hospital.id,
-        hospitalType: values.hospitalType,
-        managerName: values.managerName,
-        managerPhoneNumber: values.managerPhoneNumber,
+        adminName: values.managerName,
+        adminTel: values.managerPhoneNumber,
       },
       {
         onSuccess: () => {
@@ -220,32 +209,17 @@ const SignUp = () => {
                         <FaSearch className="h-9 w-9" />
                       </Button>
                     </div>
-                    <FormControl className="flex">
-                      <InputLabel id="hospital-type-label">
-                        병원 유형 *
-                      </InputLabel>
-                      <Select
-                        labelId="hospital-type-label"
-                        name="hospitalType"
-                        label="병원 유형 *"
-                        className="flex-grow"
-                        value={values.hospitalType}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={
-                          touched.hospitalType && Boolean(errors.hospitalType)
-                        }
-                      >
-                        {Object.values(HospitalType).map((type) => (
-                          <MenuItem value={type}>{type}</MenuItem>
-                        ))}
-                      </Select>
-                      {touched.hospitalType && errors.hospitalType && (
-                        <Typography color="error">
-                          {errors.hospitalType}
-                        </Typography>
-                      )}
-                    </FormControl>
+                    <TextField
+                      type="text"
+                      placeholder="병원 유형"
+                      className="flex-grow"
+                      value={values.hospital.type}
+                      disabled={true}
+                      error={
+                        touched.hospital?.id && Boolean(errors.hospital?.id)
+                      }
+                      helperText={touched.hospital?.id && errors.hospital?.id}
+                    />
                   </div>
                   <div className="flex flex-col gap-4">
                     <p className="text-xl">관리자 정보</p>
