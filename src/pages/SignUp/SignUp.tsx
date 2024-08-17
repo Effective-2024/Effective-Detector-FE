@@ -44,9 +44,17 @@ const SignUp = () => {
   };
 
   const validationSchema = Yup.object({
-    id: Yup.string().required('ID를 입력해주세요'),
+    id: Yup.string()
+      .matches(
+        /^[a-zA-Z0-9-_]{8,32}$/,
+        '아이디는 8자~32자의 영문 대소문자, 숫자, 특수문자(-,_)로 이루어져야합니다',
+      )
+      .required('ID를 입력해주세요'),
     password: Yup.string()
-      .min(8, '비밀번호는 8자 이상이어야 합니다')
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,32}$/,
+        '비밀번호는 8자~32자의 영문 대소문자, 숫자를 모두 포함하고 있어야 합니다',
+      )
       .required('비밀번호를 입력해주세요'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password')], '비밀번호가 일치하지 않습니다')
@@ -55,7 +63,12 @@ const SignUp = () => {
       id: Yup.number().min(1, '병원을 검색하여 선택해주세요'),
     }),
     managerName: Yup.string().required('관리자 이름을 입력해주세요'),
-    managerPhoneNumber: Yup.string().required('관리자 전화번호를 입력해주세요'),
+    managerPhoneNumber: Yup.string()
+      .matches(
+        /^010([0-9]{3,4})([0-9]{4})$/,
+        '전화번호는 010XXXXXXXX의 형식이어야 합니다.',
+      )
+      .required('관리자 전화번호를 입력해주세요'),
   });
 
   const handleSubmit = async (

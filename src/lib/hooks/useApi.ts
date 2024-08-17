@@ -21,7 +21,7 @@ export const useLogin = () =>
       const response = await client.post(`/auth/login`, {
         data: { loginId, loginPassword },
       });
-      return response.data;
+      return response?.data;
     },
   });
 
@@ -36,7 +36,7 @@ export const useExistMemberIdQuery = () =>
   useAxiosMutation({
     mutationFn: async (loginId: string): Promise<ExistMemberId | null> => {
       const response = await client.get(`/auth/login-id/${loginId}`);
-      return response.data;
+      return response?.data;
     },
   });
 
@@ -45,7 +45,7 @@ export const useHospitalSearchQuery = (keyword: string) =>
     queryKey: QueryKeys.HOSPITAL_SEARCH(keyword),
     queryFn: async (): Promise<HospitalDto | null> => {
       const response = await client.get(`/hospitals`, { params: { keyword } });
-      return response.data;
+      return response?.data;
     },
   });
 
@@ -74,7 +74,7 @@ export const useMyInformationQuery = () =>
     queryKey: QueryKeys.MY_INFORMATION,
     queryFn: async (): Promise<HospitalDto | null> => {
       const response = await client.get(`/auth/members/me`);
-      return response.data;
+      return response?.data;
     },
   });
 
@@ -83,6 +83,6 @@ export const useHospitalStatisticQuery = (hospitalId: number) =>
     queryKey: QueryKeys.HOSPITAL_STATISTIC(hospitalId),
     queryFn: async (): Promise<HospitalStatisticDto | null> => {
       const response = await client.get(`/hospitals/${hospitalId}`);
-      return response.data;
+      return response?.data;
     },
   });
