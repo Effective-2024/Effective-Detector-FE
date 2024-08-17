@@ -1,6 +1,12 @@
 import { HospitalType } from './hospital';
 
-export type Role = 'ROLE_병원_관리자' | 'ROLE_서비스_관리자' | 'ROLE_비로그인';
+export type Role = 'ROLE_ADMIN' | 'ROLE_SUPER_ADMIN' | 'ROLE_ANONYMOUS';
+
+export interface LoginDto {
+  id: number;
+  name: string;
+  memberRole: Role;
+}
 
 export interface MemberInfo {
   memberId: number;
@@ -17,18 +23,31 @@ export interface ExistMemberId {
 }
 
 export interface MemberCreateDto {
-  id: string;
-  password: string;
+  loginId: string;
+  loginPassword: string;
+  adminName: string;
+  adminTel: string;
   hospitalId: number;
-  hospitalType: HospitalType;
-  managerName: string;
-  managerPhoneNumber: string;
 }
 
 export interface HospitalDto {
   id: number;
   name?: string;
   type?: HospitalType;
-  address?: string;
-  tel?: string;
+}
+
+export interface MyInformationDto {
+  id: number;
+  name: string;
+  memberRole: Role;
+}
+
+export interface HospitalStatisticDto {
+  id: number;
+  name: string;
+  type: HospitalType;
+  today: number;
+  year: number;
+  detectionRate: number;
+  accidents: { date: string; accidentCount: number }[];
 }

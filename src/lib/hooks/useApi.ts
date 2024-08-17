@@ -1,44 +1,89 @@
+import { QueryKeys } from '~/data/queryKey';
 import { client } from '../api/client.axios';
-import { useAxiosMutation } from './useAxios';
-import { ExistMemberId, MemberCreateDto } from '~/types/common.dto';
-import { BusinessError } from '~/types/error';
+import { useAxiosMutation, useAxiosQuery } from './useAxios';
+import {
+  ExistMemberId,
+  HospitalDto,
+  HospitalStatisticDto,
+  LoginDto,
+  MemberCreateDto,
+} from '~/types/common.dto';
 
-export const useExistMemberIdQuery = () =>
+export const useLogin = () =>
   useAxiosMutation({
-    mutationFn: async (memberId: string): Promise<ExistMemberId | null> => {
-      try {
-        const response = await client.get(`/login/check`, {
-          params: { memberId },
-        });
-        return response.data;
-      } catch (error) {
-        if (error instanceof BusinessError) {
-          return null;
-        }
-        throw error;
-      }
+    mutationFn: async ({
+      loginId,
+      loginPassword,
+    }: {
+      loginId: string;
+      loginPassword: string;
+    }): Promise<LoginDto | null> => {
+      const response = await client.post(`/auth/login`, {
+        data: { loginId, loginPassword },
+      });
+      return response.data;
+    },
+  });
+
+export const useLogout = () =>
+  useAxiosMutation({
+    mutationFn: async () => {
+      await client.post(`/auth/logout`);
+    },
+  });
+
+export const useExistMemberIdQuery = (loginId: string) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.EXIST_MEMBER_ID(loginId),
+    queryFn: async (): Promise<ExistMemberId | null> => {
+      const response = await client.get(`/auth/login-id/${loginId}`);
+      return response.data;
+    },
+  });
+
+export const useHospitalSearchQuery = (keyword: string) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.HOSPITAL_SEARCH(keyword),
+    queryFn: async (): Promise<HospitalDto | null> => {
+      const response = await client.get(`/hospitals`, { params: { keyword } });
+      return response.data;
     },
   });
 
 export const useMemberCreate = () =>
   useAxiosMutation({
     mutationFn: async ({
-      id,
-      password,
+      loginId,
+      loginPassword,
+      adminName,
+      adminTel,
       hospitalId,
-      hospitalType,
-      managerName,
-      managerPhoneNumber,
     }: MemberCreateDto) => {
-      await client.post(`/sign-up`, {
+      await client.post(`/auth/sign-up`, {
         data: {
-          id,
-          password,
+          loginId,
+          loginPassword,
+          adminName,
+          adminTel,
           hospitalId,
-          hospitalType,
-          managerName,
-          managerPhoneNumber,
         },
       });
+    },
+  });
+export const useMyInformationQuery = () =>
+  useAxiosQuery({
+    queryKey: QueryKeys.MY_INFORMATION,
+    queryFn: async (): Promise<HospitalDto | null> => {
+      const response = await client.get(`/auth/members/me`);
+      return response.data;
+    },
+  });
+
+export const useHospitalStatisticQuery = (hospitalId: number) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.HOSPITAL_STATISTIC(hospitalId),
+    queryFn: async (): Promise<HospitalStatisticDto | null> => {
+      const response = await client.get(`/hospitals/${hospitalId}`);
+      return response.data;
     },
   });
