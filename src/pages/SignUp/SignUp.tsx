@@ -130,7 +130,9 @@ const SignUp = () => {
           variant="contained"
           onClick={checkIdAvailability}
           className="h-[56px]"
-          disabled={isCheckExistMemberPending || !field.value}
+          disabled={
+            isCheckExistMemberPending || (meta.touched && Boolean(meta.error))
+          }
         >
           중복 확인
         </Button>
