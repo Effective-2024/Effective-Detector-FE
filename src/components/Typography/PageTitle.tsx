@@ -3,7 +3,7 @@ interface PageTitleProps {
 }
 
 const PageTitle = ({ title }: PageTitleProps) => (
-  <div className="text-xl font-bold">{title}</div>
+  <div className="text-2xl font-bold">{title}</div>
 );
 
 export default PageTitle;

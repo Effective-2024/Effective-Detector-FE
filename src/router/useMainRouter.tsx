@@ -4,6 +4,7 @@ import Login from '@pages/Login/Login';
 import NotFound from '@pages/NotFound/NotFound';
 import Layout from '@components/Layout/Layout';
 import SignUp from '@pages/SignUp/SignUp';
+import MyPage from '~/pages/MyPage/MyPage';
 
 const useMainRouter = () =>
   useRoutes([
@@ -15,6 +16,7 @@ const useMainRouter = () =>
         { path: '*', element: <NotFound /> },
         { path: 'login', element: <Login /> },
         { path: 'sign-up', element: <SignUp /> },
+        { path: 'my', element: <MyPage /> },
       ],
     },
   ]);

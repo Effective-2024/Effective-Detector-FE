@@ -7,7 +7,7 @@ const ClientHome = () => {
       <PageTitle title="Dashboard" />
       <div className="mt-9 flex flex-col gap-12">
         <div>
-          <p className="mb-5 font-bold">사고가 감지된 병실</p>
+          <p className="mb-5 text-lg font-bold">사고가 감지된 병실</p>
           <div className="flex h-[196px] gap-10">
             {accident && <div className="w-[300px] rounded bg-gray-400" />}
             <div className="flex flex-grow flex-col items-center justify-center gap-9 rounded bg-background-comment text-lg font-bold">
@@ -33,7 +33,7 @@ const ClientHome = () => {
           </div>
         </div>
         <div>
-          <p className="mb-5 font-bold">사고 현황</p>
+          <p className="mb-5 text-lg font-bold">사고 현황</p>
           <div className="flex justify-between">
             <div className="h-[183px] w-[336px] rounded bg-gray-400" />
             <div className="flex flex-1 flex-grow flex-col items-center justify-center gap-4">
