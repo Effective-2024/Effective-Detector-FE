@@ -5,8 +5,7 @@ import { logout } from '@store/member.slice';
 import { FaUserCircle } from 'react-icons/fa';
 
 const categories = [
-  { title: '병실 관리', url: '/ward' },
-  { title: '환자 관리', url: '/patient' },
+  { title: '카메라 관리', url: '/camera' },
   { title: '사고 기록', url: '/accident' },
 ];
 
