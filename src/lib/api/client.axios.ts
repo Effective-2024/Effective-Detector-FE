@@ -3,7 +3,7 @@ import axios from 'axios';
 import { categorizeError } from '~/types/error';
 
 export const client = axios.create({
-  baseURL: process.env.SERVER_URL,
+  baseURL: process.env.REACT_APP_SERVER_URL,
   withCredentials: true,
 });
 
