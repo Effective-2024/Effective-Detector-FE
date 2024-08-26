@@ -38,10 +38,9 @@ export const useExistMemberIdQuery = () =>
     },
   });
 
-export const useHospitalSearchQuery = (keyword: string) =>
-  useAxiosQuery({
-    queryKey: QueryKeys.HOSPITAL_SEARCH(keyword),
-    queryFn: async (): Promise<HospitalDto | null> => {
+export const useHospitalSearchQuery = () =>
+  useAxiosMutation({
+    mutationFn: async (keyword: string): Promise<HospitalDto[]> => {
       const response = await client.get(`/hospitals`, { params: { keyword } });
       return response?.data;
     },

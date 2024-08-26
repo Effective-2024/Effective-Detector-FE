@@ -34,6 +34,8 @@ export interface HospitalDto {
   id: number;
   name?: string;
   type?: HospitalType;
+  address?: string;
+  tel: string;
 }
 
 export interface MyInformationDto {
