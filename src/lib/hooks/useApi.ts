@@ -55,14 +55,12 @@ export const useMemberCreate = () =>
       adminTel,
       hospitalId,
     }: MemberCreateDto) => {
-      await client.post(`/auth/sign-up`, {
-        data: {
-          loginId,
-          loginPassword,
-          adminName,
-          adminTel,
-          hospitalId,
-        },
+      await client.post(`/auth/signup`, {
+        loginId,
+        loginPassword,
+        adminName,
+        adminTel,
+        hospitalId,
       });
     },
   });
