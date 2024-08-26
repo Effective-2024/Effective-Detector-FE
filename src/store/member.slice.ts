@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import cookie from 'react-cookies';
+import { Role } from '~/types/common.dto';
 
 export interface AuthState {
   name: string;
   memberId: number;
+  role: Role;
   token: string;
-  isModerator: boolean;
 }
 
 export interface AuthSliceState extends AuthState {
@@ -20,8 +21,8 @@ const initialState: InitialState = {
   value: {
     name: '',
     memberId: -1,
+    role: 'ROLE_ANONYMOUS',
     token: '',
-    isModerator: false,
     isAuth: false,
   },
 };

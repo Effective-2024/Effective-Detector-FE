@@ -1,8 +1,8 @@
 import { ReactComponent as Logo } from '@assets/logo/logo.svg';
-import { Link } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '@lib/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@lib/hooks/redux';
 import { logout } from '@store/member.slice';
 import { FaUserCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const categories = [
   { title: '카메라 관리', url: '/camera' },
@@ -17,7 +17,7 @@ const Header = () => {
       <Link to="/">
         <Logo />
       </Link>
-      {member.isAuth && !member.isModerator && (
+      {member.isAuth && member.role === 'ROLE_ADMIN' && (
         <div className="flex flex-grow justify-start gap-10">
           {categories.map(({ title, url }) => (
             <Link className="text-base font-bold" to={url}>
@@ -30,7 +30,7 @@ const Header = () => {
         <div className="flex gap-4">
           <Link to="/my" className="flex gap-1">
             <FaUserCircle className="h-6 w-6 text-comment" />
-            {!member.isModerator && member.name}
+            {member.role === 'ROLE_ADMIN' && member.name}
           </Link>
           <div className="border-l border-comment" />
           <button

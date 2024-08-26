@@ -18,7 +18,8 @@ export const useLogin = () =>
       loginPassword: string;
     }): Promise<LoginDto | null> => {
       const response = await client.post(`/auth/login`, {
-        data: { loginId, loginPassword },
+        loginId,
+        loginPassword,
       });
       return response?.data;
     },
