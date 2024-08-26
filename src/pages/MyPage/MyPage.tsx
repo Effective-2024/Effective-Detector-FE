@@ -10,7 +10,6 @@ const MyPage = () => {
       address: '부산광역시 금정구 62번길 2',
       tel: '010-1234-5678',
       type: '병원',
-      area: '부산',
     },
     admin: {
       id: 'admin',
@@ -32,7 +31,7 @@ const MyPage = () => {
             <p className="text-lg font-bold">내 병원 정보</p>
             <div className="mt-8 flex flex-col items-start gap-4">
               <p className="text-base font-bold">
-                {myInformation.hospital.area} | {myInformation.hospital.name}
+                {myInformation.hospital.name}
               </p>
 
               <span className="rounded-md bg-secondary-light px-4 py-1 text-xs text-white">
@@ -61,9 +60,9 @@ const MyPage = () => {
             </div>
           </div>
         </div>
-        <button className="rounded bg-secondary-light px-4 py-2 text-white transition-colors hover:bg-secondary">
+        {/* <button className="rounded bg-secondary-light px-4 py-2 text-white transition-colors hover:bg-secondary">
           정보 수정하기
-        </button>
+        </button> */}
       </div>
     </>
   );
