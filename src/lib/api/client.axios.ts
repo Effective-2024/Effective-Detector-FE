@@ -9,7 +9,5 @@ export const client = axios.create({
 
 client.interceptors.response.use(
   (response) => response,
-  (error) => {
-    Promise.reject(categorizeError(error));
-  },
+  (error) => Promise.reject(categorizeError(error)),
 );

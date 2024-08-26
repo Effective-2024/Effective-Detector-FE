@@ -1,13 +1,12 @@
 import { QueryKeys } from '~/data/queryKey';
-import { client } from '../api/client.axios';
-import { useAxiosMutation, useAxiosQuery } from './useAxios';
 import {
-  ExistMemberId,
   HospitalDto,
   HospitalStatisticDto,
   LoginDto,
   MemberCreateDto,
 } from '~/types/common.dto';
+import { client } from '../api/client.axios';
+import { useAxiosMutation, useAxiosQuery } from './useAxios';
 
 export const useLogin = () =>
   useAxiosMutation({
@@ -34,9 +33,8 @@ export const useLogout = () =>
 
 export const useExistMemberIdQuery = () =>
   useAxiosMutation({
-    mutationFn: async (loginId: string): Promise<ExistMemberId | null> => {
-      const response = await client.get(`/auth/login-id/${loginId}`);
-      return response?.data;
+    mutationFn: async (loginId: string) => {
+      await client.get(`/auth/login-id/${loginId}`);
     },
   });
 
