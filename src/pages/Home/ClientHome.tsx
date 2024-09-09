@@ -1,10 +1,14 @@
-import PageTitle from '@components/Typography/PageTitle';
+import ContentBox from '~/components/ContentBox';
+import PageCenterTitle from '~/components/Typography/PageCenterTitle';
 
 const ClientHome = () => {
   const accident = null;
   return (
     <>
-      <PageTitle title="Dashboard" />
+      <PageCenterTitle title="대시보드" />
+      <ContentBox title="사고 현황">
+        <div>aaa</div>
+      </ContentBox>
       <div className="mt-9 flex flex-col gap-12">
         <div>
           <p className="mb-5 text-lg font-bold">사고가 감지된 병실</p>

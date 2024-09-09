@@ -1,9 +1,13 @@
+import { Button } from '@mui/material';
 import { Navigate } from 'react-router-dom';
-import PageTitle from '~/components/Typography/PageTitle';
-import { useAppSelector } from '~/lib/hooks/redux';
+import ContentBox from '~/components/ContentBox';
+import PageCenterTitle from '~/components/Typography/PageCenterTitle';
+import { useAppDispatch, useAppSelector } from '~/lib/hooks/redux';
+import { logout } from '~/store/member.slice';
 
 const MyPage = () => {
   const member = useAppSelector((state) => state.member).value;
+  const dispatch = useAppDispatch();
   const myInformation = {
     hospital: {
       name: '행복 요양병원',
@@ -24,46 +28,56 @@ const MyPage = () => {
   }
   return (
     <>
-      <PageTitle title="계정 정보 조회" />
-      <div className="mt-9 flex flex-col items-center gap-9 rounded bg-background-comment p-6">
-        <div className="flex w-full gap-6 text-lg">
-          <div className="flex-grow">
-            <p className="text-lg font-bold">내 병원 정보</p>
-            <div className="mt-8 flex flex-col items-start gap-4">
+      <PageCenterTitle title="계정 정보 조회" />
+      <div className="flex gap-8">
+        <ContentBox title="내 병원 정보">
+          <div className="flex flex-col items-start gap-4">
+            <div className="flex items-center gap-2">
               <p className="text-base font-bold">
                 {myInformation.hospital.name}
               </p>
-
-              <span className="rounded-md bg-secondary-light px-4 py-1 text-xs text-white">
+              <span className="rounded-md bg-comment px-4 py-1 text-xs text-white">
                 {myInformation.hospital.type}
               </span>
-
-              <p className="text-sm">{myInformation.hospital.address}</p>
+            </div>
+            <div>
+              <p className="mb-2 text-sm">{myInformation.hospital.address}</p>
               <p className="text-sm">Tel: {myInformation.hospital.tel}</p>
             </div>
           </div>
-          <div className="flex-grow">
-            <p className="text-lg font-bold">계정 관리자 정보</p>
-            <div className="mt-8 flex flex-col items-start gap-4">
-              <p className="flex text-sm">
-                <b className="w-[6em]">ID</b>
-                {myInformation.admin.id}
-              </p>
-              <p className="flex text-sm">
-                <b className="w-[6em]">관리자 이름</b>
-                {myInformation.admin.name}
-              </p>
-              <p className="flex text-sm">
-                <b className="w-[6em]">전화번호</b>
-                {myInformation.admin.phoneNumber}
-              </p>
-            </div>
+        </ContentBox>
+        <ContentBox title="계정 관리자 정보">
+          <div className="flex flex-col items-start gap-4">
+            <p className="flex text-sm">
+              <b className="w-[6em]">ID</b>
+              {myInformation.admin.id}
+            </p>
+            <p className="flex text-sm">
+              <b className="w-[6em]">관리자 이름</b>
+              {myInformation.admin.name}
+            </p>
+            <p className="flex text-sm">
+              <b className="w-[6em]">전화번호</b>
+              {myInformation.admin.phoneNumber}
+            </p>
           </div>
-        </div>
-        {/* <button className="rounded bg-secondary-light px-4 py-2 text-white transition-colors hover:bg-secondary">
-          정보 수정하기
-        </button> */}
+        </ContentBox>
       </div>
+      <ContentBox title="계정 관리" titleCenter>
+        <div className="flex justify-center gap-8">
+          <Button
+            size="large"
+            variant="outlined"
+            color="error"
+            onClick={() => dispatch(logout())}
+          >
+            로그아웃
+          </Button>
+          <Button size="large" variant="contained" color="error">
+            회원탈퇴
+          </Button>
+        </div>
+      </ContentBox>
     </>
   );
 };

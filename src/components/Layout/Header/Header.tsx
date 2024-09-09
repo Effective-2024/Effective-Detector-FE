@@ -2,9 +2,10 @@ import { ReactComponent as Logo } from '@assets/logo/logo.svg';
 import { useAppDispatch, useAppSelector } from '@lib/hooks/redux';
 import { logout } from '@store/member.slice';
 import { FaUserCircle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const categories = [
+  { title: '대시보드', url: '/' },
   { title: '카메라 관리', url: '/camera' },
   { title: '사고 기록', url: '/accident' },
 ];
@@ -12,6 +13,7 @@ const categories = [
 const Header = () => {
   const member = useAppSelector((state) => state.member).value;
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   return (
     <div className="border-border fixed left-0 top-0 flex h-[62px] w-full items-center justify-between gap-8 border-b bg-white px-8">
       <Link to="/">
@@ -20,8 +22,11 @@ const Header = () => {
       {member.isAuth && member.role === 'ROLE_ADMIN' && (
         <div className="flex flex-grow justify-start gap-10">
           {categories.map(({ title, url }) => (
-            <Link className="text-base font-bold" to={url}>
-              {title}
+            <Link
+              className={`${pathname === url && 'border-b-4 border-primary'} flex h-[62px] items-center justify-center px-2 text-base font-bold`}
+              to={url}
+            >
+              <p className="">{title}</p>
             </Link>
           ))}
         </div>
