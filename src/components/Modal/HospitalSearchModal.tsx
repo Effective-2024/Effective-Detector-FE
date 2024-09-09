@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { FormikErrors } from 'formik';
 import { ChangeEvent, useState } from 'react';
 import { VscClose } from 'react-icons/vsc';
+import { hospitalTypeLabel } from '~/data/hospital';
 import { useHospitalSearchQuery } from '~/lib/hooks/useApi';
 import useDebounce from '~/lib/hooks/useDebounce';
 import { Hospital, SignUpInfo } from '~/pages/SignUp/SignUp';
@@ -89,11 +90,11 @@ const HospitalSearchModal = ({
                       <p className="flex flex-wrap items-center gap-x-2">
                         <b>{hospital.name}</b>
                         <span className="rounded-md bg-gray-300 px-2 py-1 text-xs">
-                          {hospital.type}
+                          {hospital.type && hospitalTypeLabel[hospital.type]}
                         </span>
                       </p>
                       <p className="text-sm text-comment">{hospital.address}</p>
-                      <p className="text-xs text-gray-400">
+                      <p className="text-sm text-comment">
                         TEL: {hospital.tel}
                       </p>
                     </div>

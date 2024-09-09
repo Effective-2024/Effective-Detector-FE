@@ -5,7 +5,7 @@ module.exports = {
       colors: {
         primary: '#06B73B',
         background: '#F0F0F0',
-        comment: '#BDB27B',
+        comment: '#00000061',
         danger: '#FF0000',
         'danger-light': '#FFE2E2',
         success: '#00BC4B',

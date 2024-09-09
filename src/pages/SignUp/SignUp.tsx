@@ -1,13 +1,12 @@
-import { ReactComponent as Logo } from '@assets/logo/logo.svg';
 import { useExistMemberIdQuery, useMemberCreate } from '@lib/hooks/useApi';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, Divider, TextField } from '@mui/material';
 import { Form, Formik, FormikHelpers, useField } from 'formik';
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import HospitalSearchModal from '~/components/Modal/HospitalSearchModal';
-import { HospitalType } from '~/types/hospital';
+import { HospitalType, hospitalTypeLabel } from '~/data/hospital';
 
 export interface Hospital {
   id: number;
@@ -28,7 +27,7 @@ const initialValues: SignUpInfo = {
   id: '',
   password: '',
   confirmPassword: '',
-  hospital: { id: 0, name: '', type: HospitalType.HOSPITAL },
+  hospital: { id: 0, name: '', type: 'HOSPITAL' },
   managerName: '',
   managerPhoneNumber: '',
 };
@@ -116,7 +115,7 @@ const SignUp = () => {
             {...field}
             type="text"
             label="아이디"
-            className="flex-grow"
+            className="flex-1 flex-grow"
             error={meta.touched && Boolean(meta.error)}
             helperText={meta.touched && meta.error}
             FormHelperTextProps={{ sx: { color: 'success.main' } }}
@@ -127,19 +126,18 @@ const SignUp = () => {
           />
           <Button
             type="button"
-            color="secondary"
-            variant="contained"
+            variant="outlined"
             onClick={checkIdAvailability}
-            className="h-[56px]"
             disabled={
               isCheckExistMemberPending || (meta.touched && Boolean(meta.error))
             }
+            className="h-14"
           >
             중복 확인
           </Button>
         </div>
         {idAvailable && (
-          <p className="pl-3 pt-2 text-xs text-secondary-light">
+          <p className="pl-3 pt-2 text-xs text-primary">
             사용 가능한 아이디입니다.
           </p>
         )}
@@ -148,7 +146,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="flex h-full items-center justify-center">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -163,133 +161,122 @@ const SignUp = () => {
           handleBlur,
           setFieldValue,
         }) => (
-          <Form>
-            <div className="mx-auto w-full max-w-sign">
-              <div className="my-[88px] flex flex-col gap-6">
-                <Logo />
-                <Box className="py-4">
-                  <div>
-                    <p className="text-xl">회원가입</p>
+          <Form className="flex w-full max-w-sign flex-col gap-2 rounded-lg bg-white px-10 py-16 shadow-md">
+            <div className="flex flex-col gap-2">
+              <Box className="py-4">
+                <p className="mb-1 text-xl">회원가입</p>
+                <Divider />
+              </Box>
+              <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-4">
+                  <p className="text-xl">계정 정보</p>
+                  <IdField />
+                  <div className="flex gap-2">
+                    <TextField
+                      name="password"
+                      type="password"
+                      label="비밀번호"
+                      className="flex-1 flex-grow"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={touched.password && Boolean(errors.password)}
+                      helperText={touched.password && errors.password}
+                    />
+                    <TextField
+                      name="confirmPassword"
+                      type="password"
+                      label="비밀번호 확인"
+                      className="flex-1 flex-grow"
+                      value={values.confirmPassword}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={
+                        touched.confirmPassword &&
+                        Boolean(errors.confirmPassword)
+                      }
+                      helperText={
+                        touched.confirmPassword && errors.confirmPassword
+                      }
+                    />
                   </div>
-                  <div className="mt-2 border-b border-comment" />
-                </Box>
-                <div className="flex flex-col gap-8">
-                  <div className="flex flex-col gap-4">
-                    <p className="text-xl">계정 정보</p>
-                    <IdField />
-                    <div className="flex gap-2">
-                      <TextField
-                        name="password"
-                        type="password"
-                        label="비밀번호"
-                        className="flex-grow"
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={touched.password && Boolean(errors.password)}
-                        helperText={touched.password && errors.password}
-                      />
-                      <TextField
-                        name="confirmPassword"
-                        type="password"
-                        label="비밀번호 확인"
-                        className="flex-grow"
-                        value={values.confirmPassword}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={
-                          touched.confirmPassword &&
-                          Boolean(errors.confirmPassword)
-                        }
-                        helperText={
-                          touched.confirmPassword && errors.confirmPassword
-                        }
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-4">
-                    <p className="text-xl">병원 정보</p>
-                    <div className="flex gap-2">
-                      <TextField
-                        type="text"
-                        placeholder="병원명"
-                        className="flex-grow"
-                        value={values.hospital.name}
-                        disabled={true}
-                        error={
-                          touched.hospital?.id && Boolean(errors.hospital?.id)
-                        }
-                        helperText={touched.hospital?.id && errors.hospital?.id}
-                      />
-                      <Button
-                        type="button"
-                        color="primary"
-                        variant="outlined"
-                        className="!min-w-[56px] max-w-[56px] !border-2"
-                        onClick={() => setOpenHospitalSearchModal(true)}
-                      >
-                        <FaSearch className="h-9 w-9" />
-                      </Button>
-                    </div>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <p className="text-xl">병원 정보</p>
+                  <div className="flex gap-2">
                     <TextField
                       type="text"
-                      placeholder="병원 유형"
+                      placeholder="병원명"
                       className="flex-grow"
-                      value={values.hospital.type}
+                      value={values.hospital.name}
                       disabled={true}
                       error={
                         touched.hospital?.id && Boolean(errors.hospital?.id)
                       }
                       helperText={touched.hospital?.id && errors.hospital?.id}
                     />
-                  </div>
-                  <div className="flex flex-col gap-4">
-                    <p className="text-xl">관리자 정보</p>
-                    <div className="flex gap-2">
-                      <TextField
-                        type="text"
-                        label="관리자 이름"
-                        name="managerName"
-                        className="flex-grow"
-                        value={values.managerName}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={
-                          touched.managerName && Boolean(errors.managerName)
-                        }
-                        helperText={touched.managerName && errors.managerName}
-                      />
-                      <TextField
-                        type="text"
-                        label="관리자 전화번호"
-                        name="managerPhoneNumber"
-                        className="flex-grow"
-                        value={values.managerPhoneNumber}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={
-                          touched.managerPhoneNumber &&
-                          Boolean(errors.managerPhoneNumber)
-                        }
-                        helperText={
-                          touched.managerPhoneNumber &&
-                          errors.managerPhoneNumber
-                        }
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col">
                     <Button
-                      type="submit"
-                      variant="contained"
-                      size="large"
-                      disabled={
-                        isSubmitting || isCreateMemberPending || !idAvailable
-                      }
+                      type="button"
+                      variant="outlined"
+                      className="!min-w-[56px] max-w-[56px] !border-2"
+                      onClick={() => setOpenHospitalSearchModal(true)}
                     >
-                      회원가입
+                      <FaSearch className="h-9 w-9" />
                     </Button>
                   </div>
+                  <TextField
+                    type="text"
+                    placeholder="병원 유형"
+                    className="flex-grow"
+                    value={hospitalTypeLabel[values.hospital.type]}
+                    disabled={true}
+                    error={touched.hospital?.id && Boolean(errors.hospital?.id)}
+                    helperText={touched.hospital?.id && errors.hospital?.id}
+                  />
+                </div>
+                <div className="flex flex-col gap-4">
+                  <p className="text-xl">관리자 정보</p>
+                  <div className="flex gap-2">
+                    <TextField
+                      type="text"
+                      label="관리자 이름"
+                      name="managerName"
+                      className="flex-1 flex-grow"
+                      value={values.managerName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={touched.managerName && Boolean(errors.managerName)}
+                      helperText={touched.managerName && errors.managerName}
+                    />
+                    <TextField
+                      type="text"
+                      label="관리자 전화번호"
+                      name="managerPhoneNumber"
+                      className="flex-1 flex-grow"
+                      value={values.managerPhoneNumber}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={
+                        touched.managerPhoneNumber &&
+                        Boolean(errors.managerPhoneNumber)
+                      }
+                      helperText={
+                        touched.managerPhoneNumber && errors.managerPhoneNumber
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                    disabled={
+                      isSubmitting || isCreateMemberPending || !idAvailable
+                    }
+                  >
+                    회원가입
+                  </Button>
                 </div>
               </div>
             </div>
@@ -301,7 +288,7 @@ const SignUp = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 

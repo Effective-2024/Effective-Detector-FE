@@ -1,4 +1,4 @@
-import { HospitalType } from './hospital';
+import { HospitalType } from '../data/hospital';
 
 export type Role = 'ROLE_ADMIN' | 'ROLE_SUPER_ADMIN' | 'ROLE_ANONYMOUS';
 
