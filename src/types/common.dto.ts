@@ -40,9 +40,18 @@ export interface HospitalDto {
 }
 
 export interface MyInformationDto {
-  id: number;
+  id: number; // member id
+  loginId: string;
   name: string;
   memberRole: Role;
+  tel: string;
+  hospital: {
+    id: number;
+    name: string;
+    tel: string;
+    type: HospitalType;
+    address: string;
+  };
 }
 
 export interface HospitalStatisticDto {

@@ -20,7 +20,7 @@ const Header = () => {
         <Logo />
       </Link>
       {member.isAuth && member.role === 'ROLE_ADMIN' && (
-        <div className="flex flex-grow justify-start gap-10">
+        <div className="hidden flex-grow justify-start gap-10 md:flex">
           {categories.map(({ title, url }) => (
             <Link
               className={`${pathname === url && 'border-b-4 border-primary'} flex h-[62px] items-center justify-center px-2 text-base font-bold`}

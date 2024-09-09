@@ -4,8 +4,9 @@ import {
   HospitalStatisticDto,
   LoginDto,
   MemberCreateDto,
+  MyInformationDto,
 } from '~/types/common.dto';
-import { client } from '../api/client.axios';
+import { authClient, client } from '../api/client.axios';
 import { useAxiosMutation, useAxiosQuery } from './useAxios';
 
 export const useLogin = () =>
@@ -68,8 +69,8 @@ export const useMemberCreate = () =>
 export const useMyInformationQuery = () =>
   useAxiosQuery({
     queryKey: QueryKeys.MY_INFORMATION,
-    queryFn: async (): Promise<HospitalDto | null> => {
-      const response = await client.get(`/auth/members/me`);
+    queryFn: async (): Promise<MyInformationDto | null> => {
+      const response = await authClient.get(`/auth/members/me`);
       return response?.data;
     },
   });

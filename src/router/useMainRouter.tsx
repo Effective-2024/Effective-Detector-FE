@@ -17,13 +17,34 @@ const useMainRouter = () =>
         { path: '*', element: <NotFound /> },
         {
           path: 'login',
-          element: <PrivateRoute element={<Login />} redirectTo="/" />,
+          element: (
+            <PrivateRoute
+              element={<Login />}
+              redirectTo="/"
+              blockList={['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']}
+            />
+          ),
         },
         {
           path: 'sign-up',
-          element: <PrivateRoute element={<SignUp />} redirectTo="/" />,
+          element: (
+            <PrivateRoute
+              element={<SignUp />}
+              redirectTo="/"
+              blockList={['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']}
+            />
+          ),
         },
-        { path: 'my', element: <MyPage /> },
+        {
+          path: 'my',
+          element: (
+            <PrivateRoute
+              element={<MyPage />}
+              redirectTo="/"
+              blockList={['ROLE_ANONYMOUS']}
+            />
+          ),
+        },
       ],
     },
   ]);
