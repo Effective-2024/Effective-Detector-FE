@@ -1,7 +1,6 @@
-import React from 'react';
-import useMainRouter from '@router/useMainRouter';
 import ReduxProvider from '@lib/utils/reduxProvider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import useMainRouter from '@router/useMainRouter';
 import ReactQueryProvider from './lib/utils/queryProvider';
 
 function App() {
@@ -9,10 +8,7 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#BDB27B',
-      },
-      secondary: {
-        main: '#005247',
+        main: '#06B73B',
       },
     },
     typography: {

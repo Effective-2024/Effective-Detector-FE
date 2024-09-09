@@ -1,7 +1,8 @@
+import { Button } from '@mui/material';
 import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 interface HomeSectionProps {
+  title: string;
   content: ReactNode;
   buttonText: string;
   buttonUrl: string;
@@ -10,6 +11,7 @@ interface HomeSectionProps {
 }
 
 const HomeSection = ({
+  title,
   content,
   buttonText,
   buttonUrl,
@@ -17,19 +19,26 @@ const HomeSection = ({
   imagePosition,
 }: HomeSectionProps) => {
   return (
-    <div
-      className={`flex ${imagePosition === 'left' && 'flex-row-reverse'} items-center justify-between`}
-    >
-      <div className="flex flex-col items-center gap-8 text-center">
-        {content}
-        <Link
-          to={buttonUrl}
-          className="w-[215px] rounded border border-comment py-3 text-center font-bold"
+    <div className="flex flex-col gap-16 rounded-lg bg-white px-20 py-16 shadow-md">
+      <p className="text-center text-xl font-bold">{title}</p>
+      <div
+        className={`flex ${imagePosition === 'left' && 'flex-row-reverse'} justify-between`}
+      >
+        <div
+          className={`flex flex-grow flex-col justify-between gap-8 ${imagePosition === 'left' && 'items-end text-right'} `}
         >
-          {buttonText}
-        </Link>
+          <div className="leading-8">{content}</div>
+          <Button
+            variant="outlined"
+            size="large"
+            href={buttonUrl}
+            className="w-[215px] rounded border py-3 font-bold"
+          >
+            {buttonText}
+          </Button>
+        </div>
+        <img src={imageSource} className="h-[224px] w-[355px] rounded" />
       </div>
-      <img src={imageSource} className="w-[300px] rounded" />
     </div>
   );
 };

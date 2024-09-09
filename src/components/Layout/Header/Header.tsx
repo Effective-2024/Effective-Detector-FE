@@ -13,7 +13,7 @@ const Header = () => {
   const member = useAppSelector((state) => state.member).value;
   const dispatch = useAppDispatch();
   return (
-    <div className="fixed left-0 top-0 flex h-[62px] w-full items-center justify-between gap-8 border-b border-comment bg-white px-8">
+    <div className="border-border fixed left-0 top-0 flex h-[62px] w-full items-center justify-between gap-8 border-b bg-white px-8">
       <Link to="/">
         <Logo />
       </Link>
@@ -29,7 +29,7 @@ const Header = () => {
       {member.isAuth ? (
         <div className="flex gap-4">
           <Link to="/my" className="flex gap-1">
-            <FaUserCircle className="h-6 w-6 text-comment" />
+            <FaUserCircle className="h-6 w-6 text-primary" />
             {member.role === 'ROLE_ADMIN' && member.name}
           </Link>
           <div className="border-l border-comment" />
@@ -41,7 +41,7 @@ const Header = () => {
           </button>
         </div>
       ) : (
-        <Link to="/login" className="font-bold text-comment">
+        <Link to="/login" className="font-bold text-primary">
           로그인
         </Link>
       )}

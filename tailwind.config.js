@@ -3,12 +3,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FFEC00',
-        'background-primary': '#FFEC0033',
-        secondary: '#005247',
-        'secondary-light': '#659B91',
+        primary: '#06B73B',
+        background: '#F0F0F0',
         comment: '#BDB27B',
-        'background-comment': '#BDB27B33',
         danger: '#FF0000',
         'danger-light': '#FFE2E2',
         success: '#00BC4B',
