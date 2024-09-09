@@ -6,6 +6,7 @@ export interface LoginDto {
   id: number;
   name: string;
   memberRole: Role;
+  accessToken: string;
 }
 
 export interface MemberInfo {

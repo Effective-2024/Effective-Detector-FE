@@ -33,7 +33,7 @@ const Login = () => {
               name: data?.name ?? '',
               memberId: data?.id ?? -1,
               role: data?.memberRole ?? 'ROLE_ANONYMOUS',
-              token: 'token',
+              token: data?.accessToken ?? '',
             }),
           );
           setSubmitting(false);
