@@ -15,7 +15,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   return (
-    <div className="border-border fixed left-0 top-0 flex h-[62px] w-full items-center justify-between gap-8 border-b bg-white px-8">
+    <div className="border-border fixed left-0 top-0 z-10 flex h-[62px] w-full items-center justify-between gap-8 border-b bg-white px-8">
       <Link to="/">
         <Logo />
       </Link>
