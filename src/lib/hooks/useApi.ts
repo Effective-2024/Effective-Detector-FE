@@ -1,4 +1,6 @@
+import { DatasetType } from '@mui/x-charts/internals';
 import { QueryKeys } from '~/data/queryKey';
+import { mockDatasetByMonth, mockDatasetByYear } from '~/data/statistic';
 import {
   HospitalDto,
   HospitalStatisticDto,
@@ -81,5 +83,36 @@ export const useHospitalStatisticQuery = (hospitalId: number) =>
     queryFn: async (): Promise<HospitalStatisticDto | null> => {
       const response = await client.get(`/hospitals/${hospitalId}`);
       return response?.data;
+    },
+  });
+
+export const useGlobalStatisticByYearQuery = (options?: {
+  enabled?: boolean;
+}) =>
+  useAxiosQuery({
+    ...options,
+    queryKey: QueryKeys.GLOBAL_STATISTIC_BY_YEAR,
+    queryFn: async (): Promise<DatasetType> => {
+      // const response = await client.get(`/statistics/year`);
+      // return response?.data;
+      return mockDatasetByYear;
+    },
+  });
+
+export const useGlobalStatisticByMonthQuery = (
+  year: string,
+  options?: {
+    enabled?: boolean;
+  },
+) =>
+  useAxiosQuery({
+    ...options,
+    queryKey: QueryKeys.GLOBAL_STATISTIC_BY_MONTH(year),
+    queryFn: async (): Promise<DatasetType> => {
+      // const response = await client.get(`/statistics/month`, {
+      //   params: { year },
+      // });
+      // return response?.data;
+      return mockDatasetByMonth;
     },
   });

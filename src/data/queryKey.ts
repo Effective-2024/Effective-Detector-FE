@@ -5,4 +5,9 @@ export const QueryKeys = {
     'hospital-statistic',
     hospitalId,
   ],
+  GLOBAL_STATISTIC_BY_YEAR: ['global-statistic-by-year'],
+  GLOBAL_STATISTIC_BY_MONTH: (year: string) => [
+    'global-statistic-by-month',
+    year,
+  ],
 };

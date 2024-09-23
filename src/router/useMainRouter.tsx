@@ -1,10 +1,11 @@
 import Layout from '@components/Layout/Layout';
 import Home from '@pages/Home/Home';
 import Login from '@pages/Login/Login';
+import MyPage from '@pages/MyPage/MyPage';
 import NotFound from '@pages/NotFound/NotFound';
 import SignUp from '@pages/SignUp/SignUp';
+import Statistic from '@pages/Statistic/Statistic';
 import { useRoutes } from 'react-router-dom';
-import MyPage from '~/pages/MyPage/MyPage';
 import PrivateRoute from './PrivateRoute';
 
 const useMainRouter = () =>
@@ -24,6 +25,10 @@ const useMainRouter = () =>
               blockList={['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']}
             />
           ),
+        },
+        {
+          path: 'statistic',
+          element: <Statistic />,
         },
         {
           path: 'sign-up',
