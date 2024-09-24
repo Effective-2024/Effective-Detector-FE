@@ -9,6 +9,12 @@
 //   year?: string;
 // }
 
+import { GridColDef } from '@mui/x-data-grid';
+import {
+  AccidentInformationDto,
+  AccidentInformationPageableDto,
+} from '~/types/common.dto';
+
 export const mockDatasetByMonth = [
   {
     slipping: 5,
@@ -222,3 +228,112 @@ export const mockPerformanceStatistic = {
   mostAccidentsOrccuredMonth: 8,
   mostAccidentsOrccuredYear: 2022,
 };
+
+export const mockAccidentInformations: AccidentInformationPageableDto = {
+  totalPages: 3,
+  totalElements: 13,
+  size: 5,
+  number: 1,
+  sort: {
+    empty: false,
+    sorted: true,
+    unsorted: false,
+  },
+  first: false, // 현재 페이지가 첫 페이지인지 여부
+  last: false, // 현재 페이지가 마지막 페이지인지 여부
+  pageable: '{"page":1,"size":5}', // 페이지 요청 정보 (JSON 형식)
+  numberOfElements: 5, // 현재 페이지의 항목 수
+  empty: false, // 현재 페이지가 비어 있는지 여부
+  content: [
+    {
+      id: 1,
+      date: '2024-08-01',
+      type: {
+        id: 1,
+        content: '미끄러짐',
+      },
+      age: {
+        id: 1,
+        content: '10대',
+      },
+      videoUrl: 'https://',
+    },
+    {
+      id: 2,
+      date: '2023-09-23',
+      type: {
+        id: 5,
+        content: '오작동',
+      },
+      age: {
+        id: 2,
+        content: '20대',
+      },
+      videoUrl: 'https://',
+    },
+    {
+      id: 3,
+      date: '2023-08-12',
+      type: {
+        id: 2,
+        content: '환자 간 다툼',
+      },
+      age: {
+        id: 6,
+        content: '60~70대',
+      },
+      videoUrl: 'https://',
+    },
+    {
+      id: 4,
+      date: '2022-10-02',
+      type: {
+        id: 1,
+        content: '미끄러짐',
+      },
+      age: {
+        id: 4,
+        content: '40대',
+      },
+      videoUrl: 'https://',
+    },
+    {
+      id: 5,
+      date: '2022-06-13',
+      type: {
+        id: 3,
+        content: '시설 부주의',
+      },
+      age: {
+        id: 5,
+        content: '50대',
+      },
+      videoUrl: 'https://',
+    },
+  ],
+};
+
+export const accidentDataGridColumns: GridColDef<AccidentInformationDto>[] = [
+  { field: 'id', headerName: 'No', width: 90 },
+  {
+    field: 'date',
+    headerName: '사고 발생 일자',
+    flex: 1,
+    valueGetter: (_, row) => row.date.replaceAll('-', '.'),
+  },
+  {
+    field: 'type',
+    headerName: '분류',
+    flex: 1,
+    valueGetter: (_, row) => row.type.content,
+  },
+  {
+    field: 'age',
+    headerName: '피해자 연령',
+    type: 'number',
+    flex: 1,
+    headerAlign: 'left',
+    align: 'left',
+    valueGetter: (_, row) => row.age.content,
+  },
+];
