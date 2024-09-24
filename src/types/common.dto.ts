@@ -1,5 +1,24 @@
 import { HospitalType } from '../data/hospital';
 
+interface PageSort {
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
+}
+
+interface Pageable {
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+  sort: PageSort;
+  first: boolean;
+  last: boolean;
+  pageable: string;
+  numberOfElements: number;
+  empty: boolean;
+}
+
 export type Role = 'ROLE_ADMIN' | 'ROLE_SUPER_ADMIN' | 'ROLE_ANONYMOUS';
 
 export interface LoginDto {
@@ -74,4 +93,21 @@ export interface PerformanceStatisticDto {
   detectionAccuracy: number; //퍼센트
   mostAccidentsOrccuredMonth: number;
   mostAccidentsOrccuredYear: number;
+}
+export interface AccidentInformationDto {
+  id: number;
+  date: string;
+  type: {
+    id: number;
+    content: string;
+  };
+  age: {
+    id: number;
+    content: string;
+  };
+  videoUrl: string;
+}
+
+export interface AccidentInformationPageableDto extends Pageable {
+  content: AccidentInformationDto[];
 }

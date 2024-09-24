@@ -1,6 +1,5 @@
-import { Switch } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
 import ContentBox from '~/components/ContentBox';
+import AccidentInformations from '~/components/Statistic/AccidentInformations';
 import PerformanceStatistics from '~/components/Statistic/PerformanceStatistics';
 import StatisticBarChart from '~/components/Statistic/StatisticBarChart';
 import PageCenterTitle from '~/components/Typography/PageCenterTitle';
@@ -16,11 +15,7 @@ const Statistic = () => {
         </div>
       </ContentBox>
       <ContentBox title="사고 이력">
-        <div className="flex items-center">
-          <label>오작동 사고 포함</label>
-          <Switch />
-        </div>
-        <DataGrid columns={[]} />
+        <AccidentInformations />
       </ContentBox>
     </>
   );

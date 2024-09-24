@@ -1,11 +1,13 @@
 import { DatasetType } from '@mui/x-charts/internals';
 import { QueryKeys } from '~/data/queryKey';
 import {
+  mockAccidentInformations,
   mockDatasetByMonth,
   mockDatasetByYear,
   mockPerformanceStatistic,
 } from '~/data/statistic';
 import {
+  AccidentInformationPageableDto,
   HospitalDto,
   HospitalStatisticDto,
   LoginDto,
@@ -129,5 +131,25 @@ export const usePerformanceStatisticQuery = () =>
       // const response = await client.get(`/statistics/performance`);
       // return response?.data;
       return mockPerformanceStatistic;
+    },
+  });
+
+export const useAccidentInformationsQuery = (
+  includeMalfunction: boolean,
+  pageNumber: number,
+  pageSize: number,
+) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.ACCIDENT_INFORMATIONS(
+      includeMalfunction,
+      pageNumber,
+      pageSize,
+    ),
+    queryFn: async (): Promise<AccidentInformationPageableDto> => {
+      // const response = await client.get(`/accidents`,{
+      //   params:{includeMalfunction,pageNumber,pageSize}
+      // });
+      // return response?.data;
+      return mockAccidentInformations;
     },
   });
