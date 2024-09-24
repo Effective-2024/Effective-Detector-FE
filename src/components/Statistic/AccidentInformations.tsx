@@ -60,10 +60,7 @@ const AccidentInformations = () => {
           // TODO 모달 구현하기
           console.log(params.row.videoUrl);
         }}
-<<<<<<< HEAD
         getRowId={(row) => row.id}
-=======
->>>>>>> 30cab9e810d3855214d2428f99f21c7435afc2ca
         pageSizeOptions={[5, 10, 50, 100]}
         disableRowSelectionOnClick
         sx={{
