@@ -63,3 +63,15 @@ export interface HospitalStatisticDto {
   detectionRate: number;
   accidents: { date: string; accidentCount: number }[];
 }
+
+export interface PerformanceStatisticDto {
+  totalAccidentCount: number;
+  primaryReason: {
+    id: number;
+    content: string;
+  };
+  increaseRateByLastYear: number; // 퍼센트
+  detectionAccuracy: number; //퍼센트
+  mostAccidentsOrccuredMonth: number;
+  mostAccidentsOrccuredYear: number;
+}

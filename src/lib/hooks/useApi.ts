@@ -1,12 +1,17 @@
 import { DatasetType } from '@mui/x-charts/internals';
 import { QueryKeys } from '~/data/queryKey';
-import { mockDatasetByMonth, mockDatasetByYear } from '~/data/statistic';
+import {
+  mockDatasetByMonth,
+  mockDatasetByYear,
+  mockPerformanceStatistic,
+} from '~/data/statistic';
 import {
   HospitalDto,
   HospitalStatisticDto,
   LoginDto,
   MemberCreateDto,
   MyInformationDto,
+  PerformanceStatisticDto,
 } from '~/types/common.dto';
 import { authClient, client } from '../api/client.axios';
 import { useAxiosMutation, useAxiosQuery } from './useAxios';
@@ -114,5 +119,15 @@ export const useGlobalStatisticByMonthQuery = (
       // });
       // return response?.data;
       return mockDatasetByMonth;
+    },
+  });
+
+export const usePerformanceStatisticQuery = () =>
+  useAxiosQuery({
+    queryKey: QueryKeys.PERFORMANCE_STATISTIC,
+    queryFn: async (): Promise<PerformanceStatisticDto> => {
+      // const response = await client.get(`/statistics/performance`);
+      // return response?.data;
+      return mockPerformanceStatistic;
     },
   });

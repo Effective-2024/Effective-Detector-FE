@@ -4,9 +4,9 @@ interface CircleBadgeProps {
 }
 
 const CircleBadge = ({ title, content }: CircleBadgeProps) => (
-  <div className="border-secondary-light h-[110px] w-[110px] rounded-full border-2 py-6 text-center text-xs font-bold">
-    <p>{title}</p>
-    <p className="mt-4 text-2xl text-danger">{content}</p>
+  <div className="flex h-[105px] w-[105px] flex-col justify-center gap-1 rounded-full border border-primary text-center">
+    <p className="text-xs">{title}</p>
+    <p className="text-base font-bold">{content}</p>
   </div>
 );
 

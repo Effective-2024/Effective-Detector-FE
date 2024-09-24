@@ -210,3 +210,15 @@ export const barChartSeriesByTotal = [
     valueFormatter,
   },
 ];
+
+export const mockPerformanceStatistic = {
+  totalAccidentCount: 82,
+  primaryReason: {
+    id: 1,
+    content: '미끄러짐',
+  },
+  increaseRateByLastYear: 30.5,
+  detectionAccuracy: 98.8,
+  mostAccidentsOrccuredMonth: 8,
+  mostAccidentsOrccuredYear: 2022,
+};

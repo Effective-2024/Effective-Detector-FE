@@ -10,4 +10,5 @@ export const QueryKeys = {
     'global-statistic-by-month',
     year,
   ],
+  PERFORMANCE_STATISTIC: ['perforce-statistic'],
 };
