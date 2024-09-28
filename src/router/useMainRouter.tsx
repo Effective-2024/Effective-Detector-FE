@@ -6,6 +6,7 @@ import NotFound from '@pages/NotFound/NotFound';
 import SignUp from '@pages/SignUp/SignUp';
 import Statistic from '@pages/Statistic/Statistic';
 import { useRoutes } from 'react-router-dom';
+import HospitalStatistic from '~/pages/Statistic/HospitalStatistic';
 import PrivateRoute from './PrivateRoute';
 
 const useMainRouter = () =>
@@ -45,6 +46,16 @@ const useMainRouter = () =>
           element: (
             <PrivateRoute
               element={<MyPage />}
+              redirectTo="/"
+              blockList={['ROLE_ANONYMOUS']}
+            />
+          ),
+        },
+        {
+          path: 'statistic/:id',
+          element: (
+            <PrivateRoute
+              element={<HospitalStatistic />}
               redirectTo="/"
               blockList={['ROLE_ANONYMOUS']}
             />

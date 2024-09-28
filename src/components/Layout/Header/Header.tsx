@@ -1,18 +1,22 @@
 import { ReactComponent as Logo } from '@assets/logo/logo.svg';
 import { useAppDispatch, useAppSelector } from '@lib/hooks/redux';
 import { logout } from '@store/member.slice';
+import { useMemo } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-
-const categories = [
-  { title: '모니터링', url: '/' },
-  { title: '사고 기록', url: '/accident' },
-];
 
 const Header = () => {
   const member = useAppSelector((state) => state.member).value;
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
+
+  const categories = useMemo(
+    () => [
+      { title: '모니터링', url: '/' },
+      { title: '사고 기록', url: `/statistic/${member.memberId}` },
+    ],
+    [member],
+  );
   return (
     <div className="border-border fixed left-0 top-0 z-10 flex h-[62px] w-full items-center justify-between gap-8 border-b bg-white px-8">
       <Link to="/">
