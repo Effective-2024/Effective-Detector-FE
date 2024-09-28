@@ -5,8 +5,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 
 const categories = [
-  { title: '대시보드', url: '/' },
-  { title: '카메라 관리', url: '/camera' },
+  { title: '모니터링', url: '/' },
   { title: '사고 기록', url: '/accident' },
 ];
 

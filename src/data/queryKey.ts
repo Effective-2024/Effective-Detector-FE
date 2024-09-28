@@ -11,9 +11,11 @@ export const QueryKeys = {
     year,
   ],
   PERFORMANCE_STATISTIC: ['perforce-statistic'],
-  ACCIDENT_INFORMATIONS: (
-    includeMalfunction: boolean,
-    pageNumber: number,
-    pageSize: number,
-  ) => ['accident-informations', includeMalfunction, pageNumber, pageSize],
+  ACCIDENT_INFORMATIONS: (pageNumber: number, pageSize: number) => [
+    'accident-informations',
+    pageNumber,
+    pageSize,
+  ],
+  CAMERAS: (hospitalId: number) => ['cameras', hospitalId],
+  MONITORS: (hospitalId: number) => ['monitors', hospitalId],
 };

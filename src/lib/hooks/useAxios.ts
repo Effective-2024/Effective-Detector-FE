@@ -9,10 +9,11 @@ import { AxiosError } from 'axios';
 import { useEffect } from 'react';
 
 import { redirect, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
-  UnauthorizedError,
   AccessDeniedError,
   BusinessError,
+  UnauthorizedError,
 } from '~/types/error';
 
 const handleError = (error: Error, pathname: string) => {
@@ -23,7 +24,7 @@ const handleError = (error: Error, pathname: string) => {
   }
 
   if (error instanceof AccessDeniedError) {
-    window.alert('해당 요청을 수행할 권한이 없습니다.');
+    toast.error('해당 요청을 수행할 권한이 없습니다.');
     return;
   }
 
@@ -32,7 +33,6 @@ const handleError = (error: Error, pathname: string) => {
     error.originalError instanceof AxiosError &&
     error.originalError.response
   ) {
-    window.alert(error.originalError.response.data.detail);
     return;
   }
 

@@ -256,7 +256,6 @@ export const mockAccidentInformations: AccidentInformationPageableDto = {
         id: 1,
         content: '10대',
       },
-      videoUrl: 'https://',
     },
     {
       id: 2,
@@ -269,7 +268,6 @@ export const mockAccidentInformations: AccidentInformationPageableDto = {
         id: 2,
         content: '20대',
       },
-      videoUrl: 'https://',
     },
     {
       id: 3,
@@ -282,7 +280,6 @@ export const mockAccidentInformations: AccidentInformationPageableDto = {
         id: 6,
         content: '60~70대',
       },
-      videoUrl: 'https://',
     },
     {
       id: 4,
@@ -295,7 +292,6 @@ export const mockAccidentInformations: AccidentInformationPageableDto = {
         id: 4,
         content: '40대',
       },
-      videoUrl: 'https://',
     },
     {
       id: 5,
@@ -308,7 +304,6 @@ export const mockAccidentInformations: AccidentInformationPageableDto = {
         id: 5,
         content: '50대',
       },
-      videoUrl: 'https://',
     },
   ],
 };

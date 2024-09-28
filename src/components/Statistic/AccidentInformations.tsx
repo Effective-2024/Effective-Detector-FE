@@ -1,28 +1,19 @@
-import { Box, Stack, Switch } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { DataGrid, GridPagination, gridClasses } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { accidentDataGridColumns } from '~/data/statistic';
 import { useAccidentInformationsQuery } from '~/lib/hooks/useApi';
 
 const AccidentInformations = () => {
-  const [includeMalfunction, setIncludeMalfunction] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(5);
   const { data: accidentInformations } = useAccidentInformationsQuery(
-    includeMalfunction,
     pageNumber,
     pageSize,
   );
 
   return (
     <>
-      <div className="flex items-center">
-        <label>오작동 사고 포함</label>
-        <Switch
-          value={includeMalfunction}
-          onChange={(_, checked) => setIncludeMalfunction(checked)}
-        />
-      </div>
       <DataGrid
         rows={accidentInformations?.content}
         columns={accidentDataGridColumns}
@@ -55,10 +46,6 @@ const AccidentInformations = () => {
               />
             </Stack>
           ),
-        }}
-        onRowClick={(params) => {
-          // TODO 모달 구현하기
-          console.log(params.row.videoUrl);
         }}
         getRowId={(row) => row.id}
         pageSizeOptions={[5, 10, 50, 100]}

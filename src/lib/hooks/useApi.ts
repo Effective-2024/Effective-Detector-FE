@@ -1,4 +1,5 @@
 import { DatasetType } from '@mui/x-charts/internals';
+import { mockCameras, mockMonitors } from '~/data/hospital';
 import { QueryKeys } from '~/data/queryKey';
 import {
   mockAccidentInformations,
@@ -8,10 +9,13 @@ import {
 } from '~/data/statistic';
 import {
   AccidentInformationPageableDto,
+  CameraDto,
   HospitalDto,
   HospitalStatisticDto,
   LoginDto,
   MemberCreateDto,
+  MonitorDto,
+  MonitorPatchDto,
   MyInformationDto,
   PerformanceStatisticDto,
 } from '~/types/common.dto';
@@ -135,21 +139,46 @@ export const usePerformanceStatisticQuery = () =>
   });
 
 export const useAccidentInformationsQuery = (
-  includeMalfunction: boolean,
   pageNumber: number,
   pageSize: number,
 ) =>
   useAxiosQuery({
-    queryKey: QueryKeys.ACCIDENT_INFORMATIONS(
-      includeMalfunction,
-      pageNumber,
-      pageSize,
-    ),
+    queryKey: QueryKeys.ACCIDENT_INFORMATIONS(pageNumber, pageSize),
     queryFn: async (): Promise<AccidentInformationPageableDto> => {
       // const response = await client.get(`/accidents`,{
       //   params:{includeMalfunction,pageNumber,pageSize}
       // });
       // return response?.data;
       return mockAccidentInformations;
+    },
+  });
+
+export const useCamerasQuery = (hospitalId: number) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.CAMERAS(hospitalId),
+    queryFn: async (): Promise<CameraDto[]> => {
+      // const response = await authClient.get(`/hospitals/${hospitalId}/cameras`);
+      // return response?.data;
+      return mockCameras;
+    },
+  });
+
+export const useMonitorsQuery = (hospitalId: number) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.MONITORS(hospitalId),
+    queryFn: async (): Promise<MonitorDto> => {
+      // const response = await authClient.get(`/hospitals/${hospitalId}/monitors`);
+      // return response?.data;
+      return mockMonitors;
+    },
+  });
+
+export const useMonitorChangePatch = () =>
+  useAxiosMutation({
+    mutationFn: async ({ hospitalId, slot, cameraId }: MonitorPatchDto) => {
+      await authClient.patch(`/hospitals/${hospitalId}/monitors`, {
+        slot,
+        cameraId,
+      });
     },
   });

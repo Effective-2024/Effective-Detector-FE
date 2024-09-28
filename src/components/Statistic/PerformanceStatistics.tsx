@@ -7,7 +7,7 @@ const PerformanceStatistics = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="flex w-full max-w-[347px] flex-col items-center justify-center gap-4">
+    <div className="flex w-full flex-col items-center justify-center gap-4 lg:max-w-[347px]">
       <Chip
         label={`${currentYear} 누적 사고 건 수 ${performanceStatistic?.totalAccidentCount}건`}
         variant="filled"

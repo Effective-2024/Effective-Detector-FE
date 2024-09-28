@@ -105,9 +105,22 @@ export interface AccidentInformationDto {
     id: number;
     content: string;
   };
-  videoUrl: string;
 }
 
 export interface AccidentInformationPageableDto extends Pageable {
   content: AccidentInformationDto[];
+}
+
+export interface CameraDto {
+  id: number;
+  content: string;
+}
+
+export interface MonitorPatchDto {
+  hospitalId: number;
+  slot: number; // 0~4
+  cameraId: number;
+}
+export interface MonitorDto {
+  slots: ({ id: number; content: string } | null)[];
 }
