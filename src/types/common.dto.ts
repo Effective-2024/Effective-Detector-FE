@@ -107,7 +107,7 @@ export interface HospitalPerformanceStatisticDto {
   increaseRateByAverage: number; //퍼센트
 }
 
-export interface AccidentInformationDto {
+export interface GlobalAccidentInformationDto {
   id: number;
   date: string;
   type: {
@@ -120,8 +120,30 @@ export interface AccidentInformationDto {
   };
 }
 
-export interface AccidentInformationPageableDto extends Pageable {
-  content: AccidentInformationDto[];
+export interface GlobalAccidentInformationPageableDto extends Pageable {
+  content: GlobalAccidentInformationDto[];
+}
+
+export interface HospitalAccidentInformationDto {
+  id: number;
+  date: string;
+  type: {
+    id: number;
+    content: string;
+  };
+  age: {
+    id: number;
+    content: string;
+  };
+  camera: {
+    id: number;
+    content: string;
+  };
+  videoUrl: string;
+}
+
+export interface HospitalAccidentInformationPageableDto extends Pageable {
+  content: HospitalAccidentInformationDto[];
 }
 
 export interface CameraDto {

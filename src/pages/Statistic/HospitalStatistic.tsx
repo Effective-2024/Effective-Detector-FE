@@ -1,5 +1,5 @@
 import ContentBox from '~/components/ContentBox';
-import AccidentInformations from '~/components/Statistic/AccidentInformations';
+import HospitalAccidentInformations from '~/components/Statistic/HospitalAccidentInformations';
 import HospitalPerformanceStatistics from '~/components/Statistic/HospitalPerformanceStatistics';
 import HospitalStatisticBarChart from '~/components/Statistic/HospitalStaticBarChart';
 import PageCenterTitle from '~/components/Typography/PageCenterTitle';
@@ -18,7 +18,7 @@ const HospitalStatistic = () => {
         </div>
       </ContentBox>
       <ContentBox title="사고 이력">
-        <AccidentInformations />
+        <HospitalAccidentInformations />
       </ContentBox>
     </>
   );

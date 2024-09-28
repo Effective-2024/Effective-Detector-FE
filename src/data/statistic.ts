@@ -11,9 +11,11 @@
 
 import { GridColDef } from '@mui/x-data-grid';
 import {
-  AccidentInformationDto,
-  AccidentInformationPageableDto,
+  GlobalAccidentInformationDto,
+  GlobalAccidentInformationPageableDto,
   GlobalPerformanceStatisticDto,
+  HospitalAccidentInformationDto,
+  HospitalAccidentInformationPageableDto,
   HospitalPerformanceStatisticDto,
 } from '~/types/common.dto';
 
@@ -250,106 +252,247 @@ export const mockHospitalPerformanceStatistic: HospitalPerformanceStatisticDto =
     increaseRateByAverage: 16.0,
   };
 
-export const mockAccidentInformations: AccidentInformationPageableDto = {
-  totalPages: 3,
-  totalElements: 13,
-  size: 5,
-  number: 1,
-  sort: {
-    empty: false,
-    sorted: true,
-    unsorted: false,
-  },
-  first: false, // 현재 페이지가 첫 페이지인지 여부
-  last: false, // 현재 페이지가 마지막 페이지인지 여부
-  pageable: '{"page":1,"size":5}', // 페이지 요청 정보 (JSON 형식)
-  numberOfElements: 5, // 현재 페이지의 항목 수
-  empty: false, // 현재 페이지가 비어 있는지 여부
-  content: [
-    {
-      id: 1,
-      date: '2024-08-01',
-      type: {
-        id: 1,
-        content: '미끄러짐',
-      },
-      age: {
-        id: 1,
-        content: '10대',
-      },
+export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDto =
+  {
+    totalPages: 3,
+    totalElements: 13,
+    size: 5,
+    number: 1,
+    sort: {
+      empty: false,
+      sorted: true,
+      unsorted: false,
     },
-    {
-      id: 2,
-      date: '2023-09-23',
-      type: {
-        id: 5,
-        content: '오작동',
+    first: false, // 현재 페이지가 첫 페이지인지 여부
+    last: false, // 현재 페이지가 마지막 페이지인지 여부
+    pageable: '{"page":1,"size":5}', // 페이지 요청 정보 (JSON 형식)
+    numberOfElements: 5, // 현재 페이지의 항목 수
+    empty: false, // 현재 페이지가 비어 있는지 여부
+    content: [
+      {
+        id: 1,
+        date: '2024-08-01',
+        type: {
+          id: 1,
+          content: '미끄러짐',
+        },
+        age: {
+          id: 1,
+          content: '10대',
+        },
       },
-      age: {
+      {
         id: 2,
-        content: '20대',
+        date: '2023-09-23',
+        type: {
+          id: 5,
+          content: '오작동',
+        },
+        age: {
+          id: 2,
+          content: '20대',
+        },
       },
-    },
-    {
-      id: 3,
-      date: '2023-08-12',
-      type: {
-        id: 2,
-        content: '환자 간 다툼',
-      },
-      age: {
-        id: 6,
-        content: '60~70대',
-      },
-    },
-    {
-      id: 4,
-      date: '2022-10-02',
-      type: {
-        id: 1,
-        content: '미끄러짐',
-      },
-      age: {
-        id: 4,
-        content: '40대',
-      },
-    },
-    {
-      id: 5,
-      date: '2022-06-13',
-      type: {
+      {
         id: 3,
-        content: '시설 부주의',
+        date: '2023-08-12',
+        type: {
+          id: 2,
+          content: '환자 간 다툼',
+        },
+        age: {
+          id: 6,
+          content: '60~70대',
+        },
       },
-      age: {
+      {
+        id: 4,
+        date: '2022-10-02',
+        type: {
+          id: 1,
+          content: '미끄러짐',
+        },
+        age: {
+          id: 4,
+          content: '40대',
+        },
+      },
+      {
         id: 5,
-        content: '50대',
+        date: '2022-06-13',
+        type: {
+          id: 3,
+          content: '시설 부주의',
+        },
+        age: {
+          id: 5,
+          content: '50대',
+        },
       },
-    },
-  ],
-};
+    ],
+  };
 
-export const accidentDataGridColumns: GridColDef<AccidentInformationDto>[] = [
-  { field: 'id', headerName: 'No', width: 90 },
+export const mockHospitalAccidentInformations: HospitalAccidentInformationPageableDto =
   {
-    field: 'date',
-    headerName: '사고 발생 일자',
-    flex: 1,
-    valueGetter: (_, row) => row.date.replaceAll('-', '.'),
-  },
-  {
-    field: 'type',
-    headerName: '분류',
-    flex: 1,
-    valueGetter: (_, row) => row.type.content,
-  },
-  {
-    field: 'age',
-    headerName: '피해자 연령',
-    type: 'number',
-    flex: 1,
-    headerAlign: 'left',
-    align: 'left',
-    valueGetter: (_, row) => row.age.content,
-  },
-];
+    totalPages: 3,
+    totalElements: 13,
+    size: 5,
+    number: 1,
+    sort: {
+      empty: false,
+      sorted: true,
+      unsorted: false,
+    },
+    first: false, // 현재 페이지가 첫 페이지인지 여부
+    last: false, // 현재 페이지가 마지막 페이지인지 여부
+    pageable: '{"page":1,"size":5}', // 페이지 요청 정보 (JSON 형식)
+    numberOfElements: 5, // 현재 페이지의 항목 수
+    empty: false, // 현재 페이지가 비어 있는지 여부
+    content: [
+      {
+        id: 1,
+        date: '2024-08-01',
+        type: {
+          id: 1,
+          content: '미끄러짐',
+        },
+        age: {
+          id: 1,
+          content: '10대',
+        },
+        camera: {
+          id: 1,
+          content: '401호(일반 병동)',
+        },
+        videoUrl:
+          'https://effective-bucket.s3.ap-northeast-2.amazonaws.com/test.mp4',
+      },
+      {
+        id: 2,
+        date: '2023-09-23',
+        type: {
+          id: 5,
+          content: '오작동',
+        },
+        age: {
+          id: 2,
+          content: '20대',
+        },
+        camera: {
+          id: 3,
+          content: '403호(일반 병동)',
+        },
+        videoUrl: 'http://localhost',
+      },
+      {
+        id: 3,
+        date: '2023-08-12',
+        type: {
+          id: 2,
+          content: '환자 간 다툼',
+        },
+        age: {
+          id: 6,
+          content: '60~70대',
+        },
+        camera: {
+          id: 2,
+          content: '402호(일반 병동)',
+        },
+        videoUrl: 'http://localhost',
+      },
+      {
+        id: 4,
+        date: '2022-10-02',
+        type: {
+          id: 1,
+          content: '미끄러짐',
+        },
+        age: {
+          id: 4,
+          content: '40대',
+        },
+        camera: {
+          id: 1,
+          content: '401호(일반 병동)',
+        },
+        videoUrl: 'http://localhost',
+      },
+      {
+        id: 5,
+        date: '2022-06-13',
+        type: {
+          id: 3,
+          content: '시설 부주의',
+        },
+        age: {
+          id: 5,
+          content: '50대',
+        },
+        camera: {
+          id: 4,
+          content: '404호(일반 병동)',
+        },
+        videoUrl: 'http://localhost',
+      },
+    ],
+  };
+
+export const globalAccidentDataGridColumns: GridColDef<GlobalAccidentInformationDto>[] =
+  [
+    { field: 'id', headerName: 'No', width: 90 },
+    {
+      field: 'date',
+      headerName: '사고 발생 일자',
+      flex: 1,
+      valueGetter: (_, row) => row.date.replaceAll('-', '.'),
+    },
+    {
+      field: 'type',
+      headerName: '분류',
+      flex: 1,
+      valueGetter: (_, row) => row.type.content,
+    },
+    {
+      field: 'age',
+      headerName: '피해자 연령',
+      type: 'number',
+      flex: 1,
+      headerAlign: 'left',
+      align: 'left',
+      valueGetter: (_, row) => row.age.content,
+    },
+  ];
+
+export const hospitalAccidentDataGridColumns: GridColDef<HospitalAccidentInformationDto>[] =
+  [
+    { field: 'id', headerName: 'No', width: 90 },
+    {
+      field: 'date',
+      headerName: '사고 발생 일자',
+      flex: 1,
+      valueGetter: (_, row) => row.date.replaceAll('-', '.'),
+    },
+    {
+      field: 'type',
+      headerName: '분류',
+      flex: 1,
+      valueGetter: (_, row) => row.type.content,
+    },
+    {
+      field: 'age',
+      headerName: '피해자 연령',
+      flex: 1,
+      headerAlign: 'left',
+      align: 'left',
+      valueGetter: (_, row) => row.age.content,
+    },
+    {
+      field: 'camera',
+      headerName: '병실',
+      flex: 1,
+      headerAlign: 'left',
+      align: 'left',
+      valueGetter: (_, row) => row.camera.content,
+    },
+  ];

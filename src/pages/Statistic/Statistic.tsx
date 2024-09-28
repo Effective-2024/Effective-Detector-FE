@@ -1,5 +1,5 @@
 import ContentBox from '~/components/ContentBox';
-import AccidentInformations from '~/components/Statistic/AccidentInformations';
+import GlobalAccidentInformations from '~/components/Statistic/GlobalAccidentInformations';
 import GlobalPerformanceStatistics from '~/components/Statistic/GlobalPerformanceStatistics';
 import GlobalStatisticBarChart from '~/components/Statistic/GlobalStaticBarChart';
 import PageCenterTitle from '~/components/Typography/PageCenterTitle';
@@ -15,7 +15,7 @@ const Statistic = () => {
         </div>
       </ContentBox>
       <ContentBox title="사고 이력">
-        <AccidentInformations />
+        <GlobalAccidentInformations />
       </ContentBox>
     </>
   );

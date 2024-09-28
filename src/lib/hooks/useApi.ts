@@ -2,16 +2,18 @@ import { DatasetType } from '@mui/x-charts/internals';
 import { mockCameras, mockMonitors } from '~/data/hospital';
 import { QueryKeys } from '~/data/queryKey';
 import {
-  mockAccidentInformations,
   mockDatasetByMonth,
   mockDatasetByYear,
+  mockGlobalAccidentInformations,
   mockGlobalPerformanceStatistic,
+  mockHospitalAccidentInformations,
   mockHospitalPerformanceStatistic,
 } from '~/data/statistic';
 import {
-  AccidentInformationPageableDto,
   CameraDto,
+  GlobalAccidentInformationPageableDto,
   GlobalPerformanceStatisticDto,
+  HospitalAccidentInformationPageableDto,
   HospitalDto,
   HospitalPerformanceStatisticDto,
   HospitalStatisticDto,
@@ -205,18 +207,38 @@ export const useHospitalPerformanceStatisticQuery = (hospitalId: number) =>
   });
 
 // 사고 목록 조회
-export const useAccidentInformationsQuery = (
+export const useGlobalAccidentInformationsQuery = (
   pageNumber: number,
   pageSize: number,
 ) =>
   useAxiosQuery({
-    queryKey: QueryKeys.ACCIDENT_INFORMATIONS(pageNumber, pageSize),
-    queryFn: async (): Promise<AccidentInformationPageableDto> => {
+    queryKey: QueryKeys.GLOBAL_ACCIDENT_INFORMATIONS(pageNumber, pageSize),
+    queryFn: async (): Promise<GlobalAccidentInformationPageableDto> => {
       // const response = await client.get(`/accidents`,{
-      //   params:{includeMalfunction,pageNumber,pageSize}
+      //   params:{pageNumber,pageSize}
       // });
       // return response?.data;
-      return mockAccidentInformations;
+      return mockGlobalAccidentInformations;
+    },
+  });
+
+export const useHospitalAccidentInformationsQuery = (
+  pageNumber: number,
+  pageSize: number,
+  hospitalId: number,
+) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.HOSPITAL_ACCIDENT_INFORMATIONS(
+      pageNumber,
+      pageSize,
+      hospitalId,
+    ),
+    queryFn: async (): Promise<HospitalAccidentInformationPageableDto> => {
+      // const response = await client.get(`/accidents/hospitals/{hospitalId}`,{
+      //   params:{pageNumber,pageSize}
+      // });
+      // return response?.data;
+      return mockHospitalAccidentInformations;
     },
   });
 
