@@ -1,7 +1,7 @@
 import ContentBox from '~/components/ContentBox';
 import AccidentInformations from '~/components/Statistic/AccidentInformations';
+import HospitalPerformanceStatistics from '~/components/Statistic/HospitalPerformanceStatistics';
 import HospitalStatisticBarChart from '~/components/Statistic/HospitalStaticBarChart';
-import PerformanceStatistics from '~/components/Statistic/PerformanceStatistics';
 import PageCenterTitle from '~/components/Typography/PageCenterTitle';
 import { useAppSelector } from '~/lib/hooks/redux';
 
@@ -14,7 +14,7 @@ const HospitalStatistic = () => {
       <ContentBox title="사고 통계">
         <div className="flex flex-col gap-8 lg:flex-row">
           <HospitalStatisticBarChart />
-          <PerformanceStatistics />
+          <HospitalPerformanceStatistics />
         </div>
       </ContentBox>
       <ContentBox title="사고 이력">

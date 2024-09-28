@@ -13,6 +13,8 @@ import { GridColDef } from '@mui/x-data-grid';
 import {
   AccidentInformationDto,
   AccidentInformationPageableDto,
+  GlobalPerformanceStatisticDto,
+  HospitalPerformanceStatisticDto,
 } from '~/types/common.dto';
 
 export const mockDatasetByMonth = [
@@ -223,7 +225,7 @@ export const barChartSeriesByTotal = [
   },
 ];
 
-export const mockPerformanceStatistic = {
+export const mockGlobalPerformanceStatistic: GlobalPerformanceStatisticDto = {
   totalAccidentCount: 82,
   primaryReason: {
     id: 1,
@@ -234,6 +236,19 @@ export const mockPerformanceStatistic = {
   mostAccidentsOrccuredMonth: 8,
   mostAccidentsOrccuredYear: 2022,
 };
+
+export const mockHospitalPerformanceStatistic: HospitalPerformanceStatisticDto =
+  {
+    totalAccidentCount: 82,
+    primaryReason: {
+      id: 1,
+      content: '미끄러짐',
+    },
+    increaseRateByLastYear: 30.5,
+    detectionAccuracy: 98.8,
+    mostAccidentsOrccuredMonth: 8,
+    increaseRateByAverage: 16.0,
+  };
 
 export const mockAccidentInformations: AccidentInformationPageableDto = {
   totalPages: 3,

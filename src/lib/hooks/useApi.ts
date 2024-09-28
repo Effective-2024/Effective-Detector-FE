@@ -5,19 +5,21 @@ import {
   mockAccidentInformations,
   mockDatasetByMonth,
   mockDatasetByYear,
-  mockPerformanceStatistic,
+  mockGlobalPerformanceStatistic,
+  mockHospitalPerformanceStatistic,
 } from '~/data/statistic';
 import {
   AccidentInformationPageableDto,
   CameraDto,
+  GlobalPerformanceStatisticDto,
   HospitalDto,
+  HospitalPerformanceStatisticDto,
   HospitalStatisticDto,
   LoginDto,
   MemberCreateDto,
   MonitorDto,
   MonitorPatchDto,
   MyInformationDto,
-  PerformanceStatisticDto,
 } from '~/types/common.dto';
 import { authClient, client } from '../api/client.axios';
 import { useAxiosMutation, useAxiosQuery } from './useAxios';
@@ -97,6 +99,7 @@ export const useHospitalStatisticQuery = (hospitalId: number) =>
     },
   });
 
+// 막대 통계 그래프 데이터
 export const useGlobalStatisticByYearQuery = (options?: {
   enabled?: boolean;
 }) =>
@@ -128,6 +131,16 @@ export const useGlobalStatisticByMonthQuery = (
     },
   });
 
+export const useGlobalStatisticYearQuery = () =>
+  useAxiosQuery({
+    queryKey: QueryKeys.GLOBAL_STATISTIC_YEAR,
+    queryFn: async (): Promise<number[]> => {
+      // const response = await client.get(`/statistics/exist/years`);
+      // return response?.data;
+      return [2024, 2023, 2022, 2021];
+    },
+  });
+
 export const useHospitalStatisticByYearQuery = (
   hospitalId: number,
   options?: { enabled?: boolean },
@@ -136,7 +149,7 @@ export const useHospitalStatisticByYearQuery = (
     ...options,
     queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_YEAR(hospitalId),
     queryFn: async (): Promise<DatasetType> => {
-      // const response = await client.get(`/hospitals/{hospitalId}/statistics/year`);
+      // const response = await authClient.get(`/hospitals/{hospitalId}/statistics/year`);
       // return response?.data;
       return mockDatasetByYear;
     },
@@ -153,7 +166,7 @@ export const useHospitalStatisticByMonthQuery = (
     ...options,
     queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_MONTH(year, hospitalId),
     queryFn: async (): Promise<DatasetType> => {
-      // const response = await client.get(`/hospitals/{hospitalId}/statistics/month`, {
+      // const response = await authClient.get(`/hospitals/{hospitalId}/statistics/month`, {
       //   params: { year },
       // });
       // return response?.data;
@@ -164,32 +177,34 @@ export const useHospitalStatisticYearQuery = (hospitalId: number) =>
   useAxiosQuery({
     queryKey: QueryKeys.HOSPITAL_STATISTIC_YEAR(hospitalId),
     queryFn: async (): Promise<number[]> => {
-      // const response = await client.get(`/statistics/exist/years/hospital/{hospitalId}`);
+      // const response = await authClient.get(`/statistics/exist/years/hospital/{hospitalId}`);
       // return response?.data;
       return [2024, 2023];
     },
   });
 
-export const useGlobalStatisticYearQuery = () =>
+// 통계 성과 조회
+export const useGlobalPerformanceStatisticQuery = () =>
   useAxiosQuery({
-    queryKey: QueryKeys.GLOBAL_STATISTIC_YEAR,
-    queryFn: async (): Promise<number[]> => {
-      // const response = await client.get(`/statistics/exist/years`);
-      // return response?.data;
-      return [2024, 2023, 2022, 2021];
-    },
-  });
-
-export const usePerformanceStatisticQuery = () =>
-  useAxiosQuery({
-    queryKey: QueryKeys.PERFORMANCE_STATISTIC,
-    queryFn: async (): Promise<PerformanceStatisticDto> => {
+    queryKey: QueryKeys.GLOBAL_PERFORMANCE_STATISTIC,
+    queryFn: async (): Promise<GlobalPerformanceStatisticDto> => {
       // const response = await client.get(`/statistics/performance`);
       // return response?.data;
-      return mockPerformanceStatistic;
+      return mockGlobalPerformanceStatistic;
     },
   });
 
+export const useHospitalPerformanceStatisticQuery = (hospitalId: number) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.HOSPITAL_PERFORMANCE_STATISTIC(hospitalId),
+    queryFn: async (): Promise<HospitalPerformanceStatisticDto> => {
+      // const response = await authClient.get(`/statistics/performance/hospitals/{hospitalId}`);
+      // return response?.data;
+      return mockHospitalPerformanceStatistic;
+    },
+  });
+
+// 사고 목록 조회
 export const useAccidentInformationsQuery = (
   pageNumber: number,
   pageSize: number,

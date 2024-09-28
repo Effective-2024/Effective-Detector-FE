@@ -24,7 +24,11 @@ export const QueryKeys = {
     'hospital-statistic-year',
     hospitalId,
   ],
-  PERFORMANCE_STATISTIC: ['perforce-statistic'],
+  GLOBAL_PERFORMANCE_STATISTIC: ['perforce-statistic'],
+  HOSPITAL_PERFORMANCE_STATISTIC: (hospitalId: number) => [
+    'hospital-perforce-statistic',
+    hospitalId,
+  ],
   ACCIDENT_INFORMATIONS: (pageNumber: number, pageSize: number) => [
     'accident-informations',
     pageNumber,

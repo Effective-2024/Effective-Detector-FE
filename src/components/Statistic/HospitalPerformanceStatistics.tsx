@@ -1,9 +1,12 @@
 import { Chip } from '@mui/material';
-import { usePerformanceStatisticQuery } from '~/lib/hooks/useApi';
+import { useAppSelector } from '~/lib/hooks/redux';
+import { useHospitalPerformanceStatisticQuery } from '~/lib/hooks/useApi';
 import CircleBadge from './CircleBadge';
 
-const PerformanceStatistics = () => {
-  const { data: performanceStatistic } = usePerformanceStatisticQuery();
+const HospitalPerformanceStatistics = () => {
+  const hospitalId = useAppSelector((state) => state.member).value.memberId;
+  const { data: performanceStatistic } =
+    useHospitalPerformanceStatisticQuery(hospitalId);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -35,8 +38,8 @@ const PerformanceStatistics = () => {
             content={`${performanceStatistic?.mostAccidentsOrccuredMonth}월`}
           />
           <CircleBadge
-            title={`최다 사고 발생 연도`}
-            content={`${performanceStatistic?.mostAccidentsOrccuredYear}년`}
+            title={`평균 사고율 대비`}
+            content={`${Math.abs(performanceStatistic?.increaseRateByAverage ?? 0).toFixed(1)}%${(performanceStatistic?.increaseRateByAverage ?? 0) < 0 ? '감소' : '증가'}`}
           />
         </div>
       </div>
@@ -44,4 +47,4 @@ const PerformanceStatistics = () => {
   );
 };
 
-export default PerformanceStatistics;
+export default HospitalPerformanceStatistics;
