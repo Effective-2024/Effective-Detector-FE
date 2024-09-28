@@ -10,6 +10,20 @@ export const QueryKeys = {
     'global-statistic-by-month',
     year,
   ],
+  GLOBAL_STATISTIC_YEAR: ['global-statistic-year'],
+  HOSPITAL_STATISTIC_BY_YEAR: (hospitalId: number) => [
+    'hospital-statistic-by-year',
+    hospitalId,
+  ],
+  HOSPITAL_STATISTIC_BY_MONTH: (year: string, hospitalId: number) => [
+    'hospital-statistic-by-month',
+    year,
+    hospitalId,
+  ],
+  HOSPITAL_STATISTIC_YEAR: (hospitalId: number) => [
+    'hospital-statistic-year',
+    hospitalId,
+  ],
   PERFORMANCE_STATISTIC: ['perforce-statistic'],
   ACCIDENT_INFORMATIONS: (pageNumber: number, pageSize: number) => [
     'accident-informations',

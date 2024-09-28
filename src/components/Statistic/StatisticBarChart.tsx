@@ -1,38 +1,31 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { BarChart } from '@mui/x-charts';
-import { useState } from 'react';
+import { DatasetType } from '@mui/x-charts/internals';
+import { Dispatch, SetStateAction } from 'react';
 import {
   GroupByType,
   PeriodType,
+  StatisticType,
   barChartSeriesByReason,
   barChartSeriesByTotal,
   periodDataKey,
 } from '~/data/statistic';
-import {
-  useGlobalStatisticByMonthQuery,
-  useGlobalStatisticByYearQuery,
-} from '~/lib/hooks/useApi';
 
-const StatisticBarChart = () => {
-  const [statisticType, setStatisticType] = useState<{
-    period: PeriodType;
-    groupby: GroupByType;
-    year: string;
-  }>({
-    period: PeriodType.YEAR,
-    groupby: GroupByType.REASON,
-    year: '-',
-  });
-  const years = ['2024', '2023', '2022', '2021'];
-  const { data: datasetByYear } = useGlobalStatisticByYearQuery({
-    enabled: statisticType.period === PeriodType.YEAR,
-  });
-  const { data: datasetByMonth } = useGlobalStatisticByMonthQuery(
-    statisticType.year,
-    {
-      enabled: statisticType.period === PeriodType.MONTH,
-    },
-  );
+interface StatisticBarChart {
+  statisticType: StatisticType;
+  setStatisticType: Dispatch<SetStateAction<StatisticType>>;
+  years: number[];
+  datasetByYear?: DatasetType;
+  datasetByMonth?: DatasetType;
+}
+
+const StatisticBarChart = ({
+  statisticType,
+  setStatisticType,
+  years,
+  datasetByYear,
+  datasetByMonth,
+}: StatisticBarChart) => {
   return (
     <div className="w-full min-w-[380px]">
       <div className="flex flex-col gap-4">
@@ -52,7 +45,7 @@ const StatisticBarChart = () => {
                     return {
                       ...prev,
                       period: e.target.value as PeriodType,
-                      year: years[0],
+                      year: years?.[0].toString() ?? '-',
                     };
                   });
                 else
@@ -93,7 +86,7 @@ const StatisticBarChart = () => {
               {statisticType.period !== PeriodType.MONTH ? (
                 <MenuItem value="-">-</MenuItem>
               ) : (
-                years.map((year) => (
+                years?.map((year) => (
                   <MenuItem key={year} value={year}>
                     {year}
                   </MenuItem>

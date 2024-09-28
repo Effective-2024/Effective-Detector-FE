@@ -173,6 +173,12 @@ export enum GroupByType {
   TOTAL_COUNT = '총 건수별',
 }
 
+export interface StatisticType {
+  period: PeriodType;
+  groupby: GroupByType;
+  year: string;
+}
+
 export const periodDataKey = {
   [PeriodType.YEAR]: 'year',
   [PeriodType.MONTH]: 'month',

@@ -128,6 +128,58 @@ export const useGlobalStatisticByMonthQuery = (
     },
   });
 
+export const useHospitalStatisticByYearQuery = (
+  hospitalId: number,
+  options?: { enabled?: boolean },
+) =>
+  useAxiosQuery({
+    ...options,
+    queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_YEAR(hospitalId),
+    queryFn: async (): Promise<DatasetType> => {
+      // const response = await client.get(`/hospitals/{hospitalId}/statistics/year`);
+      // return response?.data;
+      return mockDatasetByYear;
+    },
+  });
+
+export const useHospitalStatisticByMonthQuery = (
+  year: string,
+  hospitalId: number,
+  options?: {
+    enabled?: boolean;
+  },
+) =>
+  useAxiosQuery({
+    ...options,
+    queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_MONTH(year, hospitalId),
+    queryFn: async (): Promise<DatasetType> => {
+      // const response = await client.get(`/hospitals/{hospitalId}/statistics/month`, {
+      //   params: { year },
+      // });
+      // return response?.data;
+      return mockDatasetByMonth;
+    },
+  });
+export const useHospitalStatisticYearQuery = (hospitalId: number) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.HOSPITAL_STATISTIC_YEAR(hospitalId),
+    queryFn: async (): Promise<number[]> => {
+      // const response = await client.get(`/statistics/exist/years/hospital/{hospitalId}`);
+      // return response?.data;
+      return [2024, 2023];
+    },
+  });
+
+export const useGlobalStatisticYearQuery = () =>
+  useAxiosQuery({
+    queryKey: QueryKeys.GLOBAL_STATISTIC_YEAR,
+    queryFn: async (): Promise<number[]> => {
+      // const response = await client.get(`/statistics/exist/years`);
+      // return response?.data;
+      return [2024, 2023, 2022, 2021];
+    },
+  });
+
 export const usePerformanceStatisticQuery = () =>
   useAxiosQuery({
     queryKey: QueryKeys.PERFORMANCE_STATISTIC,
