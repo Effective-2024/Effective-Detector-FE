@@ -4,7 +4,7 @@ import { useAppSelector } from '~/lib/hooks/redux';
 import { useHospitalAccidentInformationsQuery } from '~/lib/hooks/useApi';
 import { HospitalAccidentInformationDto } from '~/types/common.dto';
 import AccidentInformations from './AccidentInformations';
-import AccidentInformationModal from './Modal/AccidentInformationModal';
+import AccidentInformationEditModal from './Modal/AccidentInformationEditModal';
 
 const HospitalAccidentInformations = () => {
   const hospitalId = useAppSelector((state) => state.member).value.memberId;
@@ -31,7 +31,7 @@ const HospitalAccidentInformations = () => {
           setSelectedAccident(row)
         }
       />
-      <AccidentInformationModal
+      <AccidentInformationEditModal
         selectedAccident={selectedAccident}
         onClose={() => setSelectedAccident(null)}
       />

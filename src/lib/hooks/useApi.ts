@@ -10,6 +10,7 @@ import {
   mockHospitalPerformanceStatistic,
 } from '~/data/statistic';
 import {
+  AccidentPatchDto,
   CameraDto,
   GlobalAccidentInformationPageableDto,
   GlobalPerformanceStatisticDto,
@@ -268,6 +269,51 @@ export const useMonitorChangePatch = () =>
       await authClient.patch(`/hospitals/${hospitalId}/monitors`, {
         slot,
         cameraId,
+      });
+    },
+  });
+
+export const useAccidentTypeQuery = () =>
+  useAxiosQuery({
+    queryKey: QueryKeys.ACCIDENT_TYPES,
+    queryFn: async (): Promise<{ id: number; content: string }[]> => {
+      // const response = await authClient.get(`/accidents/types`);
+      // return response?.data;
+      return [
+        { id: 1, content: '미끄러짐' },
+        { id: 2, content: '환자 간 다툼' },
+        { id: 3, content: '시설 부실' },
+        { id: 4, content: '의료진 부주의' },
+        { id: 5, content: '기타' },
+        { id: 6, content: '오작동' },
+      ];
+    },
+  });
+export const useAccidentAgeQuery = () =>
+  useAxiosQuery({
+    queryKey: QueryKeys.ACCIDENT_AGES,
+    queryFn: async (): Promise<{ id: number; content: string }[]> => {
+      // const response = await authClient.get(`/accidents/ages`);
+      // return response?.data;
+      return [
+        { id: 1, content: '10대' },
+        { id: 2, content: '20대' },
+        { id: 3, content: '30대' },
+        { id: 4, content: '40대' },
+        { id: 5, content: '50대' },
+        { id: 6, content: '60대' },
+        { id: 7, content: '70대' },
+        { id: 8, content: '80대' },
+      ];
+    },
+  });
+
+export const useAccidentChangePatch = () =>
+  useAxiosMutation({
+    mutationFn: async ({ accidentId, type, age }: AccidentPatchDto) => {
+      await authClient.patch(`/accidents/${accidentId}`, {
+        type,
+        age,
       });
     },
   });

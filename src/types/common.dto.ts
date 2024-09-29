@@ -156,6 +156,12 @@ export interface MonitorPatchDto {
   slot: number; // 0~4
   cameraId: number;
 }
+
+export interface AccidentPatchDto {
+  accidentId: number;
+  type: number;
+  age: number;
+}
 export interface MonitorDto {
   slots: ({ id: number; content: string } | null)[];
 }

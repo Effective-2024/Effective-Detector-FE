@@ -41,4 +41,6 @@ export const QueryKeys = {
   ) => ['hospital-accident-informations', pageNumber, pageSize, hospitalId],
   CAMERAS: (hospitalId: number) => ['cameras', hospitalId],
   MONITORS: (hospitalId: number) => ['monitors', hospitalId],
+  ACCIDENT_TYPES: ['accident-types'],
+  ACCIDENT_AGES: ['accident-ages'],
 };

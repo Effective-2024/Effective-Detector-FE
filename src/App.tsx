@@ -13,6 +13,9 @@ function App() {
       primary: {
         main: '#06B73B',
       },
+      secondary: {
+        main: '#BDBDBD',
+      },
     },
     typography: {
       fontFamily: ['Pretendard'].join(','),
