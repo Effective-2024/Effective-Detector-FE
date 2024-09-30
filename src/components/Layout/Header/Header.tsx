@@ -13,7 +13,7 @@ const Header = () => {
   const categories = useMemo(
     () => [
       { title: '모니터링', url: '/' },
-      { title: '사고 기록', url: `/statistic/${member.memberId}` },
+      { title: '사고 기록', url: `/statistic/hospital` },
     ],
     [member],
   );

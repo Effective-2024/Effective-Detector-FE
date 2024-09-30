@@ -52,7 +52,7 @@ const useMainRouter = () =>
           ),
         },
         {
-          path: 'statistic/:id',
+          path: 'statistic/hospital',
           element: (
             <PrivateRoute
               element={<HospitalStatistic />}
