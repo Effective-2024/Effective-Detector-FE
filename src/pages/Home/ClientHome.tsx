@@ -91,9 +91,9 @@ const ClientHome = () => {
             카메라 편집
           </Button>
         </div>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 grid-rows-3 gap-2 md:grid-cols-4 md:grid-rows-2">
           {isMonitorLoading ? (
-            <div className="col-span-4 row-span-2 flex items-center justify-center">
+            <div className="col-span-2 row-span-4 flex items-center justify-center md:col-span-4 md:row-span-2">
               <CircularProgress />
             </div>
           ) : (
