@@ -146,6 +146,16 @@ export interface HospitalAccidentInformationPageableDto extends Pageable {
   content: HospitalAccidentInformationDto[];
 }
 
+export interface UnprocessedAccidentInformationDto {
+  id: number;
+  date: string;
+  camera: {
+    id: number;
+    content: string;
+  };
+  videoUrl: string;
+}
+
 export interface CameraDto {
   id: number;
   content: string;
@@ -162,6 +172,11 @@ export interface AccidentPatchDto {
   type: number;
   age: number;
 }
+
 export interface MonitorDto {
   slots: ({ id: number; content: string } | null)[];
+}
+
+export interface ImageMessageDto {
+  encodedImage: string;
 }

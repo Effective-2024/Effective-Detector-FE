@@ -43,4 +43,8 @@ export const QueryKeys = {
   MONITORS: (hospitalId: number) => ['monitors', hospitalId],
   ACCIDENT_TYPES: ['accident-types'],
   ACCIDENT_AGES: ['accident-ages'],
+  UNPROCESSED_ACCIDENT: (hospitalId: number) => [
+    'unprocessed-accident',
+    hospitalId,
+  ],
 };

@@ -1,4 +1,6 @@
 import { Button, CircularProgress, MenuItem, Select } from '@mui/material';
+import { IMessage } from '@stomp/stompjs';
+import { useCallback, useEffect, useState } from 'react';
 import { BiCameraOff } from 'react-icons/bi';
 import { MdSettings } from 'react-icons/md';
 import { toast } from 'react-toastify';
@@ -10,6 +12,8 @@ import {
   useMonitorChangePatch,
   useMonitorsQuery,
 } from '~/lib/hooks/useApi';
+import { useLiveStreaming } from '~/lib/hooks/useStompApi';
+import { ImageMessageDto } from '~/types/common.dto';
 
 const ClientHome = () => {
   const hospitalId = useAppSelector((state) => state.member).value.memberId;
@@ -22,60 +26,105 @@ const ClientHome = () => {
   } = useMonitorsQuery(hospitalId);
   const { mutate } = useMonitorChangePatch();
   const Monitor = ({
+    cameraId,
     slotNumber,
     colspan = 1,
     rowspan = 1,
   }: {
+    cameraId: number;
     slotNumber: number;
     colspan?: number;
     rowspan?: number;
-  }) => (
-    <div
-      className={`relative min-h-[150px] rounded-md row-span-${rowspan} col-span-${colspan}`}
-    >
-      <div className="flex h-full w-full items-center justify-center rounded-md bg-background">
-        <BiCameraOff className="h-8 w-8 text-comment" />
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 flex justify-end rounded-b-md bg-black bg-opacity-25 px-2 py-1 text-xs">
-        <Select
-          size="small"
-          variant="standard"
-          sx={{
-            fontSize: '12px',
-            padding: '0px',
-            '.MuiSelect-select': {
-              padding: '1px', // 내장된 Select 텍스트 필드의 패딩 제거
-            },
-          }}
-          value={monitors?.slots?.[slotNumber]?.id ?? -1}
-          onChange={(e) => {
-            console.log(cameras);
-            mutate(
-              {
-                hospitalId,
-                slot: slotNumber,
-                cameraId: e.target.value as number,
+  }) => {
+    const [imageUrl, setImageUrl] = useState<string>();
+    const hospitalId = useAppSelector((state) => state.member).value.memberId;
+
+    const handleRecieveImages = useCallback(async (message: IMessage) => {
+      const { encodedImage } = JSON.parse(message.body) as ImageMessageDto;
+
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl);
+      }
+      setImageUrl(encodedImage);
+      return () => {
+        if (imageUrl) URL.revokeObjectURL(imageUrl);
+      };
+    }, []);
+    // TODO: hospitalId사용하도록
+    // useLiveStreaming(hospitalId, cameraId, handleRecieveImages);
+    useLiveStreaming(1, cameraId, handleRecieveImages);
+
+    useEffect(() => {
+      return () => {
+        if (imageUrl) {
+          URL.revokeObjectURL(imageUrl);
+        }
+      };
+    }, [imageUrl]);
+    return (
+      <div
+        className={`relative h-full min-h-[150px] rounded-md row-span-${rowspan} col-span-${colspan}`}
+      >
+        {imageUrl ? (
+          <img
+            className="h-full w-full rounded-md object-cover"
+            src={`data:image/png;base64,${imageUrl}`}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center rounded-md bg-background">
+            <BiCameraOff className="h-8 w-8 text-comment" />
+          </div>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 flex justify-end rounded-b-md bg-black bg-opacity-25 px-2 py-1 text-xs">
+          <Select
+            size="small"
+            variant="standard"
+            sx={{
+              color: 'white',
+              fontSize: '12px',
+              padding: '0px',
+              '.MuiSelect-select': {
+                padding: '1px',
               },
-              {
-                onSuccess: () => {
-                  refetch();
-                },
-                onError: (error) => {
-                  toast.error(error.message);
-                },
+              '&::before': {
+                borderBottom: '1px solid white',
               },
-            );
-          }}
-        >
-          <MenuItem value={-1}>선택 안함</MenuItem>
-          {!isCameraLoding &&
-            cameras?.map(({ id, content }) => (
-              <MenuItem value={id}>{content}</MenuItem>
-            ))}
-        </Select>
+              '&:hover:not(.Mui-disabled, .Mui-error)::before': {
+                borderBottom: '2px solid white',
+              },
+            }}
+            value={monitors?.slots?.[slotNumber]?.id ?? -1}
+            onChange={(e) => {
+              console.log(cameras);
+              mutate(
+                {
+                  hospitalId,
+                  slot: slotNumber,
+                  cameraId: e.target.value as number,
+                },
+                {
+                  onSuccess: () => {
+                    refetch();
+                  },
+                  onError: (error) => {
+                    toast.error(error.message);
+                  },
+                },
+              );
+            }}
+          >
+            <MenuItem value={-1}>선택 안함</MenuItem>
+            {!isCameraLoding &&
+              cameras?.map(({ id, content }) => (
+                <MenuItem key={id} value={id}>
+                  {content}
+                </MenuItem>
+              ))}
+          </Select>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <>
@@ -98,11 +147,20 @@ const ClientHome = () => {
             </div>
           ) : (
             <>
-              <Monitor slotNumber={0} colspan={2} rowspan={2} />
+              <Monitor
+                cameraId={monitors?.slots[0]?.id ?? 0}
+                slotNumber={0}
+                colspan={2}
+                rowspan={2}
+              />
               {Array(4)
                 .fill(0)
                 .map((_, index) => (
-                  <Monitor slotNumber={index + 1} />
+                  <Monitor
+                    key={index}
+                    cameraId={monitors?.slots[index + 1]?.id ?? 0}
+                    slotNumber={index + 1}
+                  />
                 ))}
             </>
           )}

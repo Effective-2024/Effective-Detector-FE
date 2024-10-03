@@ -23,6 +23,7 @@ import {
   MonitorDto,
   MonitorPatchDto,
   MyInformationDto,
+  UnprocessedAccidentInformationDto,
 } from '~/types/common.dto';
 import { authClient, client } from '../api/client.axios';
 import { useAxiosMutation, useAxiosQuery } from './useAxios';
@@ -315,5 +316,43 @@ export const useAccidentChangePatch = () =>
         type,
         age,
       });
+    },
+  });
+
+export const useUnprocessedAccidentQuery = (hospitalId: number) =>
+  useAxiosQuery({
+    queryKey: QueryKeys.UNPROCESSED_ACCIDENT(hospitalId),
+    queryFn: async (): Promise<UnprocessedAccidentInformationDto[]> => {
+      // const response = await authClient.get(`/accidents/hospitals/${hospitals}/unprocessed`);
+      // return response?.data;
+      return [
+        {
+          id: 1,
+          date: '2024-08-01',
+          camera: {
+            id: 1,
+            content: '404호 일반 병실',
+          },
+          videoUrl: 'https://',
+        },
+        {
+          id: 2,
+          date: '2023-09-23',
+          camera: {
+            id: 1,
+            content: '404호 일반 병실',
+          },
+          videoUrl: 'https://',
+        },
+        {
+          id: 3,
+          date: '2023-08-12',
+          camera: {
+            id: 1,
+            content: '404호 일반 병실',
+          },
+          videoUrl: 'https://',
+        },
+      ];
     },
   });

@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import ReactQueryProvider from './lib/utils/queryProvider';
 
 import 'react-toastify/dist/ReactToastify.css';
+import StompClientProvider from './lib/utils/stompClientProvider';
 
 function App() {
   const router = useMainRouter();
@@ -25,8 +26,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <ReactQueryProvider>
         <ReduxProvider>
-          <div className="font-pretendard">{router}</div>
-          <ToastContainer autoClose={1500} position="bottom-right" />
+          <StompClientProvider>
+            <div className="font-pretendard">{router}</div>
+            <ToastContainer autoClose={1500} position="bottom-right" />
+          </StompClientProvider>
         </ReduxProvider>
       </ReactQueryProvider>
     </ThemeProvider>

@@ -3,15 +3,18 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 
 import memberSlice from './member.slice';
+import stompClientSlice from './stompClient.slice';
 import storage from './store';
 
 export const rootReducer = combineReducers({
   member: memberSlice,
+  stompClient: stompClientSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['stompClient'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
