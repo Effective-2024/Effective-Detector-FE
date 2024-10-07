@@ -38,6 +38,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "deploy": "npm run build && aws s3 sync build/ s3://effective-bucket/deploy/ --delete",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
