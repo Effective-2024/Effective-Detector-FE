@@ -15,17 +15,17 @@ import {
 import useBodyScrollLock from '~/lib/hooks/useBodyScrollLock';
 import useClickOutside from '~/lib/hooks/useOnClickOutside';
 import { formatDateTime } from '~/lib/utils/util';
-import { HospitalAccidentInformationDto } from '~/types/common.dto';
+import { UnprocessedAccidentInformationDto } from '~/types/common.dto';
 
-interface AccidentInformationModalProps {
-  selectedAccident: HospitalAccidentInformationDto | null;
+interface AccidentRegisterModalProps {
+  selectedAccident: UnprocessedAccidentInformationDto | null;
   onClose: () => void;
 }
 
-const AccidentInformationEditModal = ({
+const AccidentRegisterModal = ({
   selectedAccident,
   onClose,
-}: AccidentInformationModalProps) => {
+}: AccidentRegisterModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isSelectOpen, setIsSelectOpen] = useState(false); // Select가 열렸는지 여부를 관리하는 상태
   const [accidentInfo, setAccidentInfo] = useState<{
@@ -52,15 +52,6 @@ const AccidentInformationEditModal = ({
 
     return () => unlockScroll();
   }, [selectedAccident, lockScroll, unlockScroll]);
-
-  useEffect(() => {
-    if (selectedAccident) {
-      setAccidentInfo({
-        type: selectedAccident.type.id,
-        age: selectedAccident.age.id,
-      });
-    }
-  }, [selectedAccident]);
 
   if (!selectedAccident) return <></>;
   return (
@@ -145,11 +136,11 @@ const AccidentInformationEditModal = ({
                     },
                     {
                       onSuccess: () => {
-                        toast.success('사고 정보가 성공적으로 수정되었습니다.');
+                        toast.success('사고 정보가 성공적으로 등록되었습니다.');
                         onClose();
                       },
                       onError: () => {
-                        toast.error('사고 정보 수정에 실패하였습니다.');
+                        toast.error('사고 정보 등록에 실패하였습니다.');
                       },
                     },
                   )
@@ -158,7 +149,7 @@ const AccidentInformationEditModal = ({
                 color="primary"
                 sx={{ color: 'white' }}
               >
-                수정
+                등록
               </Button>
               <Button onClick={onClose} variant="contained" color="secondary">
                 창 닫기
@@ -171,4 +162,4 @@ const AccidentInformationEditModal = ({
   );
 };
 
-export default AccidentInformationEditModal;
+export default AccidentRegisterModal;

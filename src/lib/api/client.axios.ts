@@ -20,8 +20,8 @@ export const authClient = axios.create({
 
 authClient.interceptors.request.use((config) => {
   const auth = cookies.load('auth');
-  if (auth?.accessToken) {
-    config.headers.Authorization = `Bearer ${auth.accessToken}`;
+  if (auth?.token) {
+    config.headers.Authorization = `Bearer ${auth.token}`;
   }
   return config;
 });

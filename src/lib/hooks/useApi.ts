@@ -139,9 +139,8 @@ export const useGlobalStatisticYearQuery = () =>
   useAxiosQuery({
     queryKey: QueryKeys.GLOBAL_STATISTIC_YEAR,
     queryFn: async (): Promise<number[]> => {
-      // const response = await client.get(`/statistics/exist/years`);
-      // return response?.data;
-      return [2024, 2023, 2022, 2021];
+      const response = await client.get(`/statistics/exist/years`);
+      return response?.data;
     },
   });
 
@@ -181,9 +180,10 @@ export const useHospitalStatisticYearQuery = (hospitalId: number) =>
   useAxiosQuery({
     queryKey: QueryKeys.HOSPITAL_STATISTIC_YEAR(hospitalId),
     queryFn: async (): Promise<number[]> => {
-      // const response = await authClient.get(`/statistics/exist/years/hospital/{hospitalId}`);
-      // return response?.data;
-      return [2024, 2023];
+      const response = await authClient.get(
+        `/statistics/exist/years/hospital/${hospitalId}`,
+      );
+      return response?.data;
     },
   });
 
@@ -323,36 +323,9 @@ export const useUnprocessedAccidentQuery = (hospitalId: number) =>
   useAxiosQuery({
     queryKey: QueryKeys.UNPROCESSED_ACCIDENT(hospitalId),
     queryFn: async (): Promise<UnprocessedAccidentInformationDto[]> => {
-      // const response = await authClient.get(`/accidents/hospitals/${hospitals}/unprocessed`);
-      // return response?.data;
-      return [
-        {
-          id: 1,
-          date: '2024-08-01',
-          camera: {
-            id: 1,
-            content: '404호 일반 병실',
-          },
-          videoUrl: 'https://',
-        },
-        {
-          id: 2,
-          date: '2023-09-23',
-          camera: {
-            id: 1,
-            content: '404호 일반 병실',
-          },
-          videoUrl: 'https://',
-        },
-        {
-          id: 3,
-          date: '2023-08-12',
-          camera: {
-            id: 1,
-            content: '404호 일반 병실',
-          },
-          videoUrl: 'https://',
-        },
-      ];
+      const response = await authClient.get(
+        `/accidents/hospitals/${hospitalId}/unprocessed`,
+      );
+      return response?.data;
     },
   });
