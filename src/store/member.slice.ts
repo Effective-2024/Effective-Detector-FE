@@ -5,6 +5,7 @@ import { Role } from '~/types/common.dto';
 export interface AuthState {
   name: string;
   memberId: number;
+  hospitalId: number[];
   role: Role;
   token: string;
 }
@@ -21,6 +22,7 @@ const initialState: InitialState = {
   value: {
     name: '',
     memberId: -1,
+    hospitalId: [],
     role: 'ROLE_ANONYMOUS',
     token: '',
     isAuth: false,

@@ -23,6 +23,7 @@ export type Role = 'ROLE_ADMIN' | 'ROLE_SUPER_ADMIN' | 'ROLE_ANONYMOUS';
 
 export interface LoginDto {
   id: number;
+  hospitalId: number[];
   name: string;
   memberRole: Role;
   accessToken: string;
@@ -179,4 +180,11 @@ export interface MonitorDto {
 
 export interface ImageMessageDto {
   encodedImage: string;
+}
+
+export interface AccidentAlarmMessageDto {
+  hospitalId: number;
+  camera: { id: number; content: string };
+  startTime: string;
+  endTime: string;
 }

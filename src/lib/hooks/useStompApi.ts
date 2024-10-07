@@ -14,11 +14,7 @@ export function useLiveStreaming(
 
 export function useAccidentAlarm(
   hospitalId: number,
-  cameraId: number,
   callback: messageCallbackType,
 ) {
-  useSubscribe(
-    `/ws/topic/accident/hospitals/${hospitalId}/cameras/${cameraId}`,
-    callback,
-  );
+  useSubscribe(`/ws/topic/accident/hospitals/${hospitalId}`, callback);
 }

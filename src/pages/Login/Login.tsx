@@ -32,6 +32,7 @@ const Login = () => {
             login({
               name: data?.name ?? '',
               memberId: data?.id ?? -1,
+              hospitalId: data?.hospitalId ?? [],
               role: data?.memberRole ?? 'ROLE_ANONYMOUS',
               token: data?.accessToken ?? '',
             }),

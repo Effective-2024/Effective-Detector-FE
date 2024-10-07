@@ -4,7 +4,8 @@ import { useHospitalPerformanceStatisticQuery } from '~/lib/hooks/useApi';
 import CircleBadge from './CircleBadge';
 
 const HospitalPerformanceStatistics = () => {
-  const hospitalId = useAppSelector((state) => state.member).value.memberId;
+  const hospitalId = useAppSelector((state) => state.member).value
+    .hospitalId?.[0];
   const { data: performanceStatistic } =
     useHospitalPerformanceStatisticQuery(hospitalId);
   const currentYear = new Date().getFullYear();

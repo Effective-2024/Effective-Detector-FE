@@ -7,7 +7,8 @@ import AccidentInformations from './AccidentInformations';
 import AccidentInformationEditModal from './Modal/AccidentInformationEditModal';
 
 const HospitalAccidentInformations = () => {
-  const hospitalId = useAppSelector((state) => state.member).value.memberId;
+  const hospitalId = useAppSelector((state) => state.member).value
+    .hospitalId?.[0];
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(5);
   const [selectedAccident, setSelectedAccident] =

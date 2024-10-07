@@ -9,7 +9,8 @@ import {
 import StatisticBarChart from './StatisticBarChart';
 
 const HospitalStatisticBarChart = () => {
-  const hospitalId = useAppSelector((state) => state.member).value.memberId;
+  const hospitalId = useAppSelector((state) => state.member).value
+    .hospitalId?.[0];
   const [statisticType, setStatisticType] = useState<StatisticType>({
     period: PeriodType.YEAR,
     groupby: GroupByType.REASON,

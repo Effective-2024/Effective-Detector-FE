@@ -16,7 +16,8 @@ import { useLiveStreaming } from '~/lib/hooks/useStompApi';
 import { ImageMessageDto } from '~/types/common.dto';
 
 const ClientHome = () => {
-  const hospitalId = useAppSelector((state) => state.member).value.memberId;
+  const hospitalId = useAppSelector((state) => state.member).value
+    .hospitalId?.[0];
   const { data: cameras, isLoading: isCameraLoding } =
     useCamerasQuery(hospitalId);
   const {
@@ -37,7 +38,8 @@ const ClientHome = () => {
     rowspan?: number;
   }) => {
     const [imageUrl, setImageUrl] = useState<string>();
-    const hospitalId = useAppSelector((state) => state.member).value.memberId;
+    const hospitalId = useAppSelector((state) => state.member).value
+      .hospitalId?.[0];
 
     const handleRecieveImages = useCallback(async (message: IMessage) => {
       const { encodedImage } = JSON.parse(message.body) as ImageMessageDto;
@@ -50,9 +52,7 @@ const ClientHome = () => {
         if (imageUrl) URL.revokeObjectURL(imageUrl);
       };
     }, []);
-    // TODO: hospitalId사용하도록
-    // useLiveStreaming(hospitalId, cameraId, handleRecieveImages);
-    useLiveStreaming(1, cameraId, handleRecieveImages);
+    useLiveStreaming(hospitalId, cameraId, handleRecieveImages);
 
     useEffect(() => {
       return () => {
@@ -63,7 +63,11 @@ const ClientHome = () => {
     }, [imageUrl]);
     return (
       <div
-        className={`relative h-full min-h-[150px] rounded-md row-span-${rowspan} col-span-${colspan}`}
+        className={`relative h-full min-h-[150px] rounded-md`}
+        style={{
+          gridColumn: `span ${colspan} / span ${colspan}`,
+          gridRow: `span ${rowspan} / span ${rowspan}`,
+        }}
       >
         {imageUrl ? (
           <img
