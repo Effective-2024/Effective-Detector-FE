@@ -79,5 +79,6 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "http://effective-bucket.s3-website.ap-northeast-2.amazonaws.com/deploy/"
 }
