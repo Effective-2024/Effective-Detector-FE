@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Client } from '@stomp/stompjs';
 import { useEffect } from 'react';
 import SockJS from 'sockjs-client';

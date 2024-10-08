@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Stack } from '@mui/material';
 import {
   DataGrid,

@@ -3,8 +3,8 @@ import { hospitalAccidentDataGridColumns } from '~/data/statistic';
 import { useAppSelector } from '~/lib/hooks/redux';
 import { useHospitalAccidentInformationsQuery } from '~/lib/hooks/useApi';
 import { HospitalAccidentInformationDto } from '~/types/common.dto';
+import AccidentInformationEditModal from '../Modal/AccidentInformationEditModal';
 import AccidentInformations from './AccidentInformations';
-import AccidentInformationEditModal from './Modal/AccidentInformationEditModal';
 
 const HospitalAccidentInformations = () => {
   const hospitalId = useAppSelector((state) => state.member).value

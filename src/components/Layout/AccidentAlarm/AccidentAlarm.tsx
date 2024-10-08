@@ -7,7 +7,7 @@ import { useAppSelector } from '~/lib/hooks/redux';
 import { useUnprocessedAccidentQuery } from '~/lib/hooks/useApi';
 import { useAccidentAlarm } from '~/lib/hooks/useStompApi';
 import { UnprocessedAccidentInformationDto } from '~/types/common.dto';
-import AccidentRegisterModal from './AccidentRegisterModal';
+import AccidentRegisterModal from '../../Modal/AccidentRegisterModal';
 
 const AccidentAlarm = () => {
   const hospitalId = useAppSelector((state) => state.member).value
