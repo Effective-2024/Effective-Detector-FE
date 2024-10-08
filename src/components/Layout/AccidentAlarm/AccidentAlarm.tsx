@@ -40,7 +40,7 @@ const AccidentAlarm = () => {
             <div className="flex flex-col gap-2 p-4 text-sm">
               <p>
                 <span className="font-bold text-primary">
-                  {accident.camera.content}
+                  {accident.camera?.content}
                 </span>
                 에서 사고가 발생했습니다.
               </p>

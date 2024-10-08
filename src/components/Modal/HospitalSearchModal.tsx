@@ -73,7 +73,7 @@ const HospitalSearchModal = ({
     return null;
   }
   return (
-    <div className="fixed left-0 top-0 z-10 flex h-[100vh] w-[100vw] items-center justify-center bg-black bg-opacity-30">
+    <div className="fixed left-0 top-0 z-[51] flex h-[100vh] w-[100vw] items-center justify-center bg-black bg-opacity-30">
       <div
         ref={ref}
         className="flex h-[840px] w-[640px] flex-col gap-8 rounded-lg bg-white p-8"

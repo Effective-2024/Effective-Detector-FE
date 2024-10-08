@@ -31,7 +31,7 @@ function App() {
             <ToastContainer
               autoClose={1500}
               position="bottom-right"
-              className="mt-[62px]"
+              className="z-50 mt-[62px]"
             />
           </StompClientProvider>
         </ReduxProvider>

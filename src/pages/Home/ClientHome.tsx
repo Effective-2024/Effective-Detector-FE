@@ -97,7 +97,7 @@ const ClientHome = () => {
                 borderBottom: '2px solid white',
               },
             }}
-            value={monitors?.slots?.[slotNumber]?.id ?? -1}
+            value={monitors?.[slotNumber]?.id ?? -1}
             onChange={(e) => {
               console.log(cameras);
               mutate(
@@ -152,7 +152,7 @@ const ClientHome = () => {
           ) : (
             <>
               <Monitor
-                cameraId={monitors?.slots[0]?.id ?? 0}
+                cameraId={monitors?.[0]?.id ?? 0}
                 slotNumber={0}
                 colspan={2}
                 rowspan={2}
@@ -162,7 +162,7 @@ const ClientHome = () => {
                 .map((_, index) => (
                   <Monitor
                     key={index}
-                    cameraId={monitors?.slots[index + 1]?.id ?? 0}
+                    cameraId={monitors?.[index + 1]?.id ?? 0}
                     slotNumber={index + 1}
                   />
                 ))}

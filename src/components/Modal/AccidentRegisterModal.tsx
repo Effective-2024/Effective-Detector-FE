@@ -55,21 +55,24 @@ const AccidentRegisterModal = ({
 
   if (!selectedAccident) return <></>;
   return (
-    <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-20">
+    <div className="fixed inset-0 z-[51] flex items-center justify-center bg-black bg-opacity-20">
       <div
         ref={ref}
         className="flex h-[606px] w-[1084px] flex-col rounded-[4px] bg-white"
       >
         <div className="flex justify-center rounded-t-[4px] bg-background py-4">
           <p className="text-lg font-bold">
-            {selectedAccident.camera.content} 사고영상 -{' '}
+            {selectedAccident.camera?.content} 사고영상 -{' '}
             {formatDateTime(selectedAccident.date)}
           </p>
         </div>
-        <div className="flex h-[554px] flex-grow">
+        <div className="flex h-[554px] w-full flex-grow">
           <div className="flex h-full flex-grow justify-center rounded-bl-[4px] bg-black">
-            <video autoPlay loop controls className=" object-cover">
-              <source src={selectedAccident.videoUrl} type="video/mp4" />
+            <video autoPlay loop controls className="object-contain">
+              <source
+                src={`${process.env.REACT_APP_VIDEO_PREFIX}${selectedAccident.videoUrl}`}
+                type="video/mp4"
+              />
             </video>
           </div>
           <div className="flex w-[236px] flex-col justify-center gap-5 px-2 py-10">
@@ -137,6 +140,8 @@ const AccidentRegisterModal = ({
                     {
                       onSuccess: () => {
                         toast.success('사고 정보가 성공적으로 등록되었습니다.');
+                        toast.dismiss(selectedAccident.id);
+                        setAccidentInfo({ type: -1, age: -1 });
                         onClose();
                       },
                       onError: () => {

@@ -64,7 +64,7 @@ const AccidentInformationEditModal = ({
 
   if (!selectedAccident) return <></>;
   return (
-    <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-20">
+    <div className="fixed inset-0 z-[51] flex items-center justify-center bg-black bg-opacity-20">
       <div
         ref={ref}
         className="flex h-[606px] w-[1084px] flex-col rounded-[4px] bg-white"
@@ -78,7 +78,10 @@ const AccidentInformationEditModal = ({
         <div className="flex h-[554px] flex-grow">
           <div className="flex h-full flex-grow justify-center rounded-bl-[4px] bg-black">
             <video autoPlay loop controls className=" object-cover">
-              <source src={selectedAccident.videoUrl} type="video/mp4" />
+              <source
+                src={`${process.env.REACT_APP_VIDEO_PREFIX}${selectedAccident.videoUrl}`}
+                type="video/mp4"
+              />
             </video>
           </div>
           <div className="flex w-[236px] flex-col justify-center gap-5 px-2 py-10">

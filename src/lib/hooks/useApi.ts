@@ -1,14 +1,5 @@
 import { DatasetType } from '@mui/x-charts/internals';
-import { mockCameras, mockMonitors } from '~/data/hospital';
 import { QueryKeys } from '~/data/queryKey';
-import {
-  mockDatasetByMonth,
-  mockDatasetByYear,
-  mockGlobalAccidentInformations,
-  mockGlobalPerformanceStatistic,
-  mockHospitalAccidentInformations,
-  mockHospitalPerformanceStatistic,
-} from '~/data/statistic';
 import {
   AccidentPatchDto,
   CameraDto,
@@ -111,9 +102,8 @@ export const useGlobalStatisticByYearQuery = (options?: {
     ...options,
     queryKey: QueryKeys.GLOBAL_STATISTIC_BY_YEAR,
     queryFn: async (): Promise<DatasetType> => {
-      // const response = await client.get(`/statistics/year`);
-      // return response?.data;
-      return mockDatasetByYear;
+      const response = await client.get(`/statistics/year`);
+      return response?.data;
     },
   });
 
@@ -127,11 +117,10 @@ export const useGlobalStatisticByMonthQuery = (
     ...options,
     queryKey: QueryKeys.GLOBAL_STATISTIC_BY_MONTH(year),
     queryFn: async (): Promise<DatasetType> => {
-      // const response = await client.get(`/statistics/month`, {
-      //   params: { year },
-      // });
-      // return response?.data;
-      return mockDatasetByMonth;
+      const response = await client.get(`/statistics/month`, {
+        params: { year },
+      });
+      return response?.data;
     },
   });
 
@@ -152,9 +141,10 @@ export const useHospitalStatisticByYearQuery = (
     ...options,
     queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_YEAR(hospitalId),
     queryFn: async (): Promise<DatasetType> => {
-      // const response = await authClient.get(`/hospitals/{hospitalId}/statistics/year`);
-      // return response?.data;
-      return mockDatasetByYear;
+      const response = await authClient.get(
+        `/hospitals/{hospitalId}/statistics/year`,
+      );
+      return response?.data;
     },
   });
 
@@ -169,11 +159,13 @@ export const useHospitalStatisticByMonthQuery = (
     ...options,
     queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_MONTH(year, hospitalId),
     queryFn: async (): Promise<DatasetType> => {
-      // const response = await authClient.get(`/hospitals/{hospitalId}/statistics/month`, {
-      //   params: { year },
-      // });
-      // return response?.data;
-      return mockDatasetByMonth;
+      const response = await authClient.get(
+        `/hospitals/{hospitalId}/statistics/month`,
+        {
+          params: { year },
+        },
+      );
+      return response?.data;
     },
   });
 export const useHospitalStatisticYearQuery = (hospitalId: number) =>
@@ -192,9 +184,8 @@ export const useGlobalPerformanceStatisticQuery = () =>
   useAxiosQuery({
     queryKey: QueryKeys.GLOBAL_PERFORMANCE_STATISTIC,
     queryFn: async (): Promise<GlobalPerformanceStatisticDto> => {
-      // const response = await client.get(`/statistics/performance`);
-      // return response?.data;
-      return mockGlobalPerformanceStatistic;
+      const response = await client.get(`/statistics/performance`);
+      return response?.data;
     },
   });
 
@@ -202,9 +193,10 @@ export const useHospitalPerformanceStatisticQuery = (hospitalId: number) =>
   useAxiosQuery({
     queryKey: QueryKeys.HOSPITAL_PERFORMANCE_STATISTIC(hospitalId),
     queryFn: async (): Promise<HospitalPerformanceStatisticDto> => {
-      // const response = await authClient.get(`/statistics/performance/hospitals/{hospitalId}`);
-      // return response?.data;
-      return mockHospitalPerformanceStatistic;
+      const response = await authClient.get(
+        `/statistics/performance/hospitals/{hospitalId}`,
+      );
+      return response?.data;
     },
   });
 
@@ -216,11 +208,10 @@ export const useGlobalAccidentInformationsQuery = (
   useAxiosQuery({
     queryKey: QueryKeys.GLOBAL_ACCIDENT_INFORMATIONS(pageNumber, pageSize),
     queryFn: async (): Promise<GlobalAccidentInformationPageableDto> => {
-      // const response = await client.get(`/accidents`,{
-      //   params:{pageNumber,pageSize}
-      // });
-      // return response?.data;
-      return mockGlobalAccidentInformations;
+      const response = await client.get(`/accidents`, {
+        params: { pageNumber, pageSize },
+      });
+      return response?.data;
     },
   });
 
@@ -236,11 +227,10 @@ export const useHospitalAccidentInformationsQuery = (
       hospitalId,
     ),
     queryFn: async (): Promise<HospitalAccidentInformationPageableDto> => {
-      // const response = await client.get(`/accidents/hospitals/{hospitalId}`,{
-      //   params:{pageNumber,pageSize}
-      // });
-      // return response?.data;
-      return mockHospitalAccidentInformations;
+      const response = await client.get(`/accidents/hospitals/{hospitalId}`, {
+        params: { pageNumber, pageSize },
+      });
+      return response?.data;
     },
   });
 
@@ -248,19 +238,19 @@ export const useCamerasQuery = (hospitalId: number) =>
   useAxiosQuery({
     queryKey: QueryKeys.CAMERAS(hospitalId),
     queryFn: async (): Promise<CameraDto[]> => {
-      // const response = await authClient.get(`/hospitals/${hospitalId}/cameras`);
-      // return response?.data;
-      return mockCameras;
+      const response = await authClient.get(`/hospitals/${hospitalId}/cameras`);
+      return response?.data;
     },
   });
 
 export const useMonitorsQuery = (hospitalId: number) =>
   useAxiosQuery({
     queryKey: QueryKeys.MONITORS(hospitalId),
-    queryFn: async (): Promise<MonitorDto> => {
-      // const response = await authClient.get(`/hospitals/${hospitalId}/monitors`);
-      // return response?.data;
-      return mockMonitors;
+    queryFn: async (): Promise<(MonitorDto | null)[]> => {
+      const response = await authClient.get(
+        `/hospitals/${hospitalId}/monitors`,
+      );
+      return response?.data;
     },
   });
 
@@ -278,34 +268,16 @@ export const useAccidentTypeQuery = () =>
   useAxiosQuery({
     queryKey: QueryKeys.ACCIDENT_TYPES,
     queryFn: async (): Promise<{ id: number; content: string }[]> => {
-      // const response = await authClient.get(`/accidents/types`);
-      // return response?.data;
-      return [
-        { id: 1, content: '미끄러짐' },
-        { id: 2, content: '환자 간 다툼' },
-        { id: 3, content: '시설 부실' },
-        { id: 4, content: '의료진 부주의' },
-        { id: 5, content: '기타' },
-        { id: 6, content: '오작동' },
-      ];
+      const response = await authClient.get(`/accidents/types`);
+      return response?.data;
     },
   });
 export const useAccidentAgeQuery = () =>
   useAxiosQuery({
     queryKey: QueryKeys.ACCIDENT_AGES,
     queryFn: async (): Promise<{ id: number; content: string }[]> => {
-      // const response = await authClient.get(`/accidents/ages`);
-      // return response?.data;
-      return [
-        { id: 1, content: '10대' },
-        { id: 2, content: '20대' },
-        { id: 3, content: '30대' },
-        { id: 4, content: '40대' },
-        { id: 5, content: '50대' },
-        { id: 6, content: '60대' },
-        { id: 7, content: '70대' },
-        { id: 8, content: '80대' },
-      ];
+      const response = await authClient.get(`/accidents/ages`);
+      return response?.data;
     },
   });
 

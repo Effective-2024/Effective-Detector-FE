@@ -175,7 +175,8 @@ export interface AccidentPatchDto {
 }
 
 export interface MonitorDto {
-  slots: ({ id: number; content: string } | null)[];
+  id: number;
+  content: string;
 }
 
 export interface ImageMessageDto {
