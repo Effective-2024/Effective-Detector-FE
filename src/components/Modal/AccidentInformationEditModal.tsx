@@ -72,7 +72,7 @@ const AccidentInformationEditModal = ({
         <div className="flex justify-center rounded-t-[4px] bg-background py-4">
           <p className="text-lg font-bold">
             {selectedAccident.camera.content} 사고영상 -{' '}
-            {formatDateTime(selectedAccident.date)}
+            {formatDateTime(selectedAccident.startDate)}
           </p>
         </div>
         <div className="flex h-[554px] flex-grow">

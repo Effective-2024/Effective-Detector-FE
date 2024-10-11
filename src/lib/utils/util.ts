@@ -3,5 +3,8 @@ export const formatTel = (tel: string) => {
 };
 
 export const formatDateTime = (date: string) => {
-  return date;
+  return date
+    .slice(0, 10)
+    .replaceAll('-', '.')
+    .concat(' ' + date.slice(11));
 };

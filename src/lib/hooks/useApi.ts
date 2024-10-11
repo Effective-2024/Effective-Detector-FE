@@ -142,7 +142,7 @@ export const useHospitalStatisticByYearQuery = (
     queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_YEAR(hospitalId),
     queryFn: async (): Promise<DatasetType> => {
       const response = await authClient.get(
-        `/hospitals/{hospitalId}/statistics/year`,
+        `/hospitals/${hospitalId}/statistics/year`,
       );
       return response?.data;
     },
@@ -160,7 +160,7 @@ export const useHospitalStatisticByMonthQuery = (
     queryKey: QueryKeys.HOSPITAL_STATISTIC_BY_MONTH(year, hospitalId),
     queryFn: async (): Promise<DatasetType> => {
       const response = await authClient.get(
-        `/hospitals/{hospitalId}/statistics/month`,
+        `/hospitals/${hospitalId}/statistics/month`,
         {
           params: { year },
         },
@@ -194,7 +194,7 @@ export const useHospitalPerformanceStatisticQuery = (hospitalId: number) =>
     queryKey: QueryKeys.HOSPITAL_PERFORMANCE_STATISTIC(hospitalId),
     queryFn: async (): Promise<HospitalPerformanceStatisticDto> => {
       const response = await authClient.get(
-        `/statistics/performance/hospitals/{hospitalId}`,
+        `/statistics/performance/hospitals/${hospitalId}`,
       );
       return response?.data;
     },
@@ -227,7 +227,7 @@ export const useHospitalAccidentInformationsQuery = (
       hospitalId,
     ),
     queryFn: async (): Promise<HospitalAccidentInformationPageableDto> => {
-      const response = await client.get(`/accidents/hospitals/{hospitalId}`, {
+      const response = await client.get(`/accidents/hospitals/${hospitalId}`, {
         params: { pageNumber, pageSize },
       });
       return response?.data;

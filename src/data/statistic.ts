@@ -271,7 +271,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
     content: [
       {
         id: 1,
-        date: '2024-08-01',
+        startDate: '2024-08-01T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -283,7 +283,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 2,
-        date: '2023-09-23',
+        startDate: '2023-09-23T00:00:00',
         type: {
           id: 5,
           content: '오작동',
@@ -295,7 +295,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 3,
-        date: '2023-08-12',
+        startDate: '2023-08-12T00:00:00',
         type: {
           id: 2,
           content: '환자 간 다툼',
@@ -307,7 +307,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 4,
-        date: '2022-10-02',
+        startDate: '2022-10-02T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -319,7 +319,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 5,
-        date: '2022-06-13',
+        startDate: '2022-06-13T00:00:00',
         type: {
           id: 3,
           content: '시설 부주의',
@@ -351,7 +351,7 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
     content: [
       {
         id: 1,
-        date: '2024-08-01',
+        startDate: '2024-08-01T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -369,7 +369,7 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
       },
       {
         id: 2,
-        date: '2023-09-23',
+        startDate: '2023-09-23T00:00:00',
         type: {
           id: 5,
           content: '오작동',
@@ -386,7 +386,7 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
       },
       {
         id: 3,
-        date: '2023-08-12',
+        startDate: '2023-08-12T00:00:00',
         type: {
           id: 2,
           content: '환자 간 다툼',
@@ -403,7 +403,7 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
       },
       {
         id: 4,
-        date: '2022-10-02',
+        startDate: '2022-10-02T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -420,7 +420,7 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
       },
       {
         id: 5,
-        date: '2022-06-13',
+        startDate: '2022-06-13T00:00:00',
         type: {
           id: 3,
           content: '시설 부주의',
@@ -445,7 +445,7 @@ export const globalAccidentDataGridColumns: GridColDef<GlobalAccidentInformation
       field: 'date',
       headerName: '사고 발생 일자',
       flex: 1,
-      valueGetter: (_, row) => row.date.replaceAll('-', '.'),
+      valueGetter: (_, row) => row.startDate.replaceAll('-', '.'),
     },
     {
       field: 'type',
@@ -471,7 +471,7 @@ export const hospitalAccidentDataGridColumns: GridColDef<HospitalAccidentInforma
       field: 'date',
       headerName: '사고 발생 일자',
       flex: 1,
-      valueGetter: (_, row) => row.date.replaceAll('-', '.'),
+      valueGetter: (_, row) => row.startDate.replaceAll('-', '.'),
     },
     {
       field: 'type',

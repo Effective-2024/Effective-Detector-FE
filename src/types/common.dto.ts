@@ -110,7 +110,7 @@ export interface HospitalPerformanceStatisticDto {
 
 export interface GlobalAccidentInformationDto {
   id: number;
-  date: string;
+  startDate: string;
   type: {
     id: number;
     content: string;
@@ -127,7 +127,7 @@ export interface GlobalAccidentInformationPageableDto extends Pageable {
 
 export interface HospitalAccidentInformationDto {
   id: number;
-  date: string;
+  startDate: string;
   type: {
     id: number;
     content: string;
@@ -149,7 +149,7 @@ export interface HospitalAccidentInformationPageableDto extends Pageable {
 
 export interface UnprocessedAccidentInformationDto {
   id: number;
-  date: string;
+  startDate: string;
   camera: {
     id: number;
     content: string;
