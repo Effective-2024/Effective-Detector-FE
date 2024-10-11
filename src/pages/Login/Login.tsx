@@ -3,6 +3,7 @@ import { Box, Button, Divider, TextField } from '@mui/material';
 import { login } from '@store/member.slice';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useLogin } from '~/lib/hooks/useApi';
 
 interface LoginInfo {
@@ -43,6 +44,7 @@ const Login = () => {
           }, 0);
         },
         onError: () => {
+          toast.error('아이디와 비밀번호를 다시 확인해주십시오.');
           setSubmitting(false);
         },
       },
