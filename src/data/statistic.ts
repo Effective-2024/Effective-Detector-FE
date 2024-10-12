@@ -271,7 +271,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
     content: [
       {
         id: 1,
-        startDate: '2024-08-01T00:00:00',
+        startTime: '2024-08-01T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -283,7 +283,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 2,
-        startDate: '2023-09-23T00:00:00',
+        startTime: '2023-09-23T00:00:00',
         type: {
           id: 5,
           content: '오작동',
@@ -295,7 +295,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 3,
-        startDate: '2023-08-12T00:00:00',
+        startTime: '2023-08-12T00:00:00',
         type: {
           id: 2,
           content: '환자 간 다툼',
@@ -307,7 +307,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 4,
-        startDate: '2022-10-02T00:00:00',
+        startTime: '2022-10-02T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -319,7 +319,7 @@ export const mockGlobalAccidentInformations: GlobalAccidentInformationPageableDt
       },
       {
         id: 5,
-        startDate: '2022-06-13T00:00:00',
+        startTime: '2022-06-13T00:00:00',
         type: {
           id: 3,
           content: '시설 부주의',
@@ -351,7 +351,7 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
     content: [
       {
         id: 1,
-        startDate: '2024-08-01T00:00:00',
+        startTime: '2024-08-01T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -364,12 +364,16 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
           id: 1,
           content: '401호(일반 병동)',
         },
+        mike: {
+          id: 1,
+          content: '401호(일반 병동)',
+        },
         videoUrl:
           'https://effective-bucket.s3.ap-northeast-2.amazonaws.com/test.mp4',
       },
       {
         id: 2,
-        startDate: '2023-09-23T00:00:00',
+        startTime: '2023-09-23T00:00:00',
         type: {
           id: 5,
           content: '오작동',
@@ -382,11 +386,15 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
           id: 3,
           content: '403호(일반 병동)',
         },
+        mike: {
+          id: 3,
+          content: '403호(일반 병동)',
+        },
         videoUrl: 'http://localhost',
       },
       {
         id: 3,
-        startDate: '2023-08-12T00:00:00',
+        startTime: '2023-08-12T00:00:00',
         type: {
           id: 2,
           content: '환자 간 다툼',
@@ -399,11 +407,15 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
           id: 2,
           content: '402호(일반 병동)',
         },
+        mike: {
+          id: 2,
+          content: '402호(일반 병동)',
+        },
         videoUrl: 'http://localhost',
       },
       {
         id: 4,
-        startDate: '2022-10-02T00:00:00',
+        startTime: '2022-10-02T00:00:00',
         type: {
           id: 1,
           content: '미끄러짐',
@@ -416,11 +428,15 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
           id: 1,
           content: '401호(일반 병동)',
         },
+        mike: {
+          id: 1,
+          content: '401호(일반 병동)',
+        },
         videoUrl: 'http://localhost',
       },
       {
         id: 5,
-        startDate: '2022-06-13T00:00:00',
+        startTime: '2022-06-13T00:00:00',
         type: {
           id: 3,
           content: '시설 부주의',
@@ -430,6 +446,10 @@ export const mockHospitalAccidentInformations: HospitalAccidentInformationPageab
           content: '50대',
         },
         camera: {
+          id: 4,
+          content: '404호(일반 병동)',
+        },
+        mike: {
           id: 4,
           content: '404호(일반 병동)',
         },
@@ -445,7 +465,7 @@ export const globalAccidentDataGridColumns: GridColDef<GlobalAccidentInformation
       field: 'date',
       headerName: '사고 발생 일자',
       flex: 1,
-      valueGetter: (_, row) => row.startDate.replaceAll('-', '.'),
+      valueGetter: (_, row) => row.startTime.replaceAll('-', '.'),
     },
     {
       field: 'type',
@@ -471,7 +491,7 @@ export const hospitalAccidentDataGridColumns: GridColDef<HospitalAccidentInforma
       field: 'date',
       headerName: '사고 발생 일자',
       flex: 1,
-      valueGetter: (_, row) => row.startDate.replaceAll('-', '.'),
+      valueGetter: (_, row) => row.startTime.replaceAll('-', '.'),
     },
     {
       field: 'type',
@@ -488,11 +508,15 @@ export const hospitalAccidentDataGridColumns: GridColDef<HospitalAccidentInforma
       valueGetter: (_, row) => row.age.content,
     },
     {
-      field: 'camera',
-      headerName: '병실',
+      field: 'device',
+      headerName: '사고 감지 기기',
       flex: 1,
       headerAlign: 'left',
       align: 'left',
-      valueGetter: (_, row) => row.camera.content,
+      valueGetter: (_, row) => {
+        if (row.camera) return row.camera.content;
+        if (row.mike) return row.mike.content;
+        return '';
+      },
     },
   ];

@@ -227,9 +227,12 @@ export const useHospitalAccidentInformationsQuery = (
       hospitalId,
     ),
     queryFn: async (): Promise<HospitalAccidentInformationPageableDto> => {
-      const response = await client.get(`/accidents/hospitals/${hospitalId}`, {
-        params: { pageNumber, pageSize },
-      });
+      const response = await authClient.get(
+        `/accidents/hospitals/${hospitalId}`,
+        {
+          params: { pageNumber, pageSize },
+        },
+      );
       return response?.data;
     },
   });
