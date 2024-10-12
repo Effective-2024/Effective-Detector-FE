@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdWarning } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { QueryKeys } from '~/data/queryKey';
@@ -20,6 +20,9 @@ const AccidentAlarm = () => {
   const { data: unprocessedAccidents } =
     useUnprocessedAccidentQuery(hospitalId);
   const queryClient = useQueryClient();
+  const accidentsRef = useRef<UnprocessedAccidentInformationDto[] | undefined>(
+    unprocessedAccidents,
+  );
 
   const handleAccidentAlarm = useCallback(async () => {
     queryClient.invalidateQueries({
@@ -30,48 +33,62 @@ const AccidentAlarm = () => {
   useAccidentAlarmByMike(hospitalId, handleAccidentAlarm);
 
   useEffect(() => {
-    unprocessedAccidents?.forEach((accident) =>
-      toast(
-        () => (
-          <div
-            className={`flex rounded-sm border-2 ${accident.camera ? 'border-red-500' : 'border-yellow-500'} bg-white transition-shadow hover:shadow-md`}
-            onClick={() => setSelectedAccident(accident)}
-          >
+    if (unprocessedAccidents) {
+      accidentsRef.current = unprocessedAccidents;
+      unprocessedAccidents.forEach((accident) =>
+        toast(
+          () => (
             <div
-              className={`flex items-center justify-center ${accident.camera ? 'bg-red-500' : 'bg-yellow-500'} p-1 text-white`}
+              className={`flex rounded-sm border-2 ${accident.camera ? 'border-red-500' : 'border-yellow-500'} bg-white transition-shadow hover:shadow-md`}
+              onClick={() => setSelectedAccident(accident)}
             >
-              <MdWarning className="h-6 w-6" />
+              <div
+                className={`flex items-center justify-center ${accident.camera ? 'bg-red-500' : 'bg-yellow-500'} p-1 text-white`}
+              >
+                <MdWarning className="h-6 w-6" />
+              </div>
+              <div className="flex flex-col gap-2 p-4 text-sm">
+                <p>
+                  <span className="font-bold text-primary">
+                    {accident.camera?.content || accident.mike?.content}{' '}
+                    {accident.camera ? '카메라' : '마이크'}
+                  </span>
+                  에서 사고가 감지되었습니다.
+                </p>
+                <p className="text-xs text-comment">
+                  ※ 클릭하면 사고 대응을 위한 모달이 열립니다.
+                </p>
+              </div>
             </div>
-            <div className="flex flex-col gap-2 p-4 text-sm">
-              <p>
-                <span className="font-bold text-primary">
-                  {accident.camera?.content || accident.mike?.content}{' '}
-                  {accident.camera ? '카메라' : '마이크'}
-                </span>
-                에서 사고가 감지되었습니다.
-              </p>
-              <p className="text-xs text-comment">
-                ※ 클릭하면 사고 대응을 위한 모달이 열립니다.
-              </p>
-            </div>
-          </div>
+          ),
+          {
+            className: 'bg-transparent w-fit shadow-none overflow-visible p-0',
+            bodyClassName: 'w-fit overflow-visible p-0',
+            position: 'top-left',
+            autoClose: false,
+            hideProgressBar: true,
+            closeButton: false,
+            draggable: false,
+            toastId: accident.id,
+          },
         ),
-        {
-          className: 'bg-transparent w-fit shadow-none overflow-visible p-0',
-          bodyClassName: 'w-fit overflow-visible p-0',
-          position: 'top-left',
-          autoClose: false,
-          hideProgressBar: true,
-          closeButton: false,
-          draggable: false,
-          toastId: accident.id,
-        },
-      ),
-    );
+      );
+    }
     return () => {
-      unprocessedAccidents?.forEach((accident) => toast.dismiss(accident.id));
+      if (accidentsRef.current) {
+        accidentsRef.current.forEach((accident) => toast.dismiss(accident.id));
+        console.log(accidentsRef.current);
+      }
     };
   }, [unprocessedAccidents]);
+  //   useEffect(() => {
+  //     return () => {
+  //       if (accidentsRef.current) {
+  //         accidentsRef.current.forEach((accident) => toast.dismiss(accident.id));
+  //         console.log(accidentsRef.current);
+  //       }
+  //     };
+  //   }, []);
 
   return (
     <AccidentRegisterModal

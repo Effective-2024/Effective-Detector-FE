@@ -1,4 +1,5 @@
 import { useAppSelector } from '@lib/hooks/redux';
+import AccidentAlarm from '~/components/Layout/AccidentAlarm/AccidentAlarm';
 import AdminHome from './AdminHome';
 import ClientHome from './ClientHome';
 import DefaultHome from './DefaultHome';
@@ -11,7 +12,10 @@ const Home = () => {
         member.role === 'ROLE_SUPER_ADMIN' ? (
           <AdminHome />
         ) : (
-          <ClientHome />
+          <>
+            <ClientHome />
+            <AccidentAlarm />
+          </>
         )
       ) : (
         <DefaultHome />
