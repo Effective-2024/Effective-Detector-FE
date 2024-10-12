@@ -6,10 +6,8 @@ import AccidentInformations from './AccidentInformations';
 const GlobalAccidentInformations = () => {
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(5);
-  const { data: accidentInformations } = useGlobalAccidentInformationsQuery(
-    pageNumber,
-    pageSize,
-  );
+  const { data: accidentInformations, isLoading } =
+    useGlobalAccidentInformationsQuery(pageNumber, pageSize);
 
   return (
     <AccidentInformations
@@ -19,6 +17,7 @@ const GlobalAccidentInformations = () => {
       pageSize={pageSize}
       setPageSize={setPageSize}
       columns={globalAccidentDataGridColumns}
+      loading={isLoading}
     />
   );
 };

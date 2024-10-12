@@ -13,16 +13,16 @@ const GlobalStatisticBarChart = () => {
     groupby: GroupByType.REASON,
     year: '-',
   });
-  const { data: years } = useGlobalStatisticYearQuery();
-  const { data: datasetByYear } = useGlobalStatisticByYearQuery({
-    enabled: statisticType.period === PeriodType.YEAR,
-  });
-  const { data: datasetByMonth } = useGlobalStatisticByMonthQuery(
-    statisticType.year,
-    {
+  const { data: years, isLoading: isYearsLoading } =
+    useGlobalStatisticYearQuery();
+  const { data: datasetByYear, isLoading: isDatasetByYear } =
+    useGlobalStatisticByYearQuery({
+      enabled: statisticType.period === PeriodType.YEAR,
+    });
+  const { data: datasetByMonth, isLoading: isDatasetByMonth } =
+    useGlobalStatisticByMonthQuery(statisticType.year, {
       enabled: statisticType.period === PeriodType.MONTH,
-    },
-  );
+    });
   return (
     <StatisticBarChart
       statisticType={statisticType}
@@ -30,6 +30,7 @@ const GlobalStatisticBarChart = () => {
       years={years ?? []}
       datasetByYear={datasetByYear}
       datasetByMonth={datasetByMonth}
+      isLoading={isYearsLoading || isDatasetByYear || isDatasetByMonth}
     />
   );
 };

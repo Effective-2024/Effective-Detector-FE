@@ -12,9 +12,16 @@ export function useLiveStreaming(
   );
 }
 
-export function useAccidentAlarm(
+export function useAccidentAlarmByVideo(
   hospitalId: number,
   callback: messageCallbackType,
 ) {
   useSubscribe(`/ws/topic/accident/hospitals/${hospitalId}`, callback);
+}
+
+export function useAccidentAlarmByMike(
+  hospitalId: number,
+  callback: messageCallbackType,
+) {
+  useSubscribe(`/ws/topic/accident/hospitals/${hospitalId}/audio`, callback);
 }

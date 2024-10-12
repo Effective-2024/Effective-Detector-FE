@@ -16,6 +16,7 @@ interface AccidentInformationsProps {
   setPageSize: Dispatch<SetStateAction<number>>;
   columns: GridColDef<any>[];
   onRowClick?: ({ row }: { row: any }) => void;
+  loading: boolean;
 }
 
 const AccidentInformations = ({
@@ -26,19 +27,14 @@ const AccidentInformations = ({
   setPageSize,
   columns,
   onRowClick,
+  loading,
 }: AccidentInformationsProps) => {
   return (
-    <>
+    <div className="h-[371px]">
       <DataGrid
+        loading={loading}
         rows={accidentInformations?.content}
         columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
-        }}
         slots={{
           footer: () => (
             <Stack
@@ -78,7 +74,7 @@ const AccidentInformations = ({
             },
         }}
       />
-    </>
+    </div>
   );
 };
 

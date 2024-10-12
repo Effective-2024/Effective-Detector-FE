@@ -16,17 +16,17 @@ const HospitalStatisticBarChart = () => {
     groupby: GroupByType.REASON,
     year: '-',
   });
-  const { data: years } = useHospitalStatisticYearQuery(hospitalId);
-  const { data: datasetByYear } = useHospitalStatisticByYearQuery(hospitalId, {
-    enabled: statisticType.period === PeriodType.YEAR,
-  });
-  const { data: datasetByMonth } = useHospitalStatisticByMonthQuery(
-    statisticType.year,
-    hospitalId,
-    {
+  const { data: years, isLoading: isYearsLoading } =
+    useHospitalStatisticYearQuery(hospitalId);
+  const { data: datasetByYear, isLoading: isDatasetByYear } =
+    useHospitalStatisticByYearQuery(hospitalId, {
+      enabled: statisticType.period === PeriodType.YEAR,
+    });
+  const { data: datasetByMonth, isLoading: isDatasetByMonth } =
+    useHospitalStatisticByMonthQuery(statisticType.year, hospitalId, {
       enabled: statisticType.period === PeriodType.MONTH,
-    },
-  );
+    });
+
   return (
     <StatisticBarChart
       statisticType={statisticType}
@@ -34,6 +34,7 @@ const HospitalStatisticBarChart = () => {
       years={years ?? []}
       datasetByYear={datasetByYear}
       datasetByMonth={datasetByMonth}
+      isLoading={isYearsLoading || isDatasetByYear || isDatasetByMonth}
     />
   );
 };

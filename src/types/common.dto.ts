@@ -139,11 +139,11 @@ export interface HospitalAccidentInformationDto {
   camera: {
     id: number;
     content: string;
-  };
+  } | null;
   mike: {
     id: number;
     content: string;
-  };
+  } | null;
   videoUrl: string;
 }
 
@@ -157,7 +157,11 @@ export interface UnprocessedAccidentInformationDto {
   camera: {
     id: number;
     content: string;
-  };
+  } | null;
+  mike: {
+    id: number;
+    content: string;
+  } | null;
   videoUrl: string;
 }
 

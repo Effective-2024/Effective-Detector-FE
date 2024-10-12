@@ -13,11 +13,8 @@ const HospitalAccidentInformations = () => {
   const [pageSize, setPageSize] = useState<number>(5);
   const [selectedAccident, setSelectedAccident] =
     useState<HospitalAccidentInformationDto | null>(null);
-  const { data: accidentInformations } = useHospitalAccidentInformationsQuery(
-    pageNumber,
-    pageSize,
-    hospitalId,
-  );
+  const { data: accidentInformations, isLoading } =
+    useHospitalAccidentInformationsQuery(pageNumber, pageSize, hospitalId);
 
   return (
     <>
@@ -31,6 +28,7 @@ const HospitalAccidentInformations = () => {
         onRowClick={({ row }: { row: HospitalAccidentInformationDto }) =>
           setSelectedAccident(row)
         }
+        loading={isLoading}
       />
       <AccidentInformationEditModal
         selectedAccident={selectedAccident}

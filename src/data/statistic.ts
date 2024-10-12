@@ -10,6 +10,7 @@
 // }
 
 import { GridColDef } from '@mui/x-data-grid';
+import { formatDateTime } from '~/lib/utils/util';
 import {
   GlobalAccidentInformationDto,
   GlobalAccidentInformationPageableDto,
@@ -491,7 +492,7 @@ export const hospitalAccidentDataGridColumns: GridColDef<HospitalAccidentInforma
       field: 'date',
       headerName: '사고 발생 일자',
       flex: 1,
-      valueGetter: (_, row) => row.startTime.replaceAll('-', '.'),
+      valueGetter: (_, row) => formatDateTime(row.startTime),
     },
     {
       field: 'type',
@@ -514,8 +515,8 @@ export const hospitalAccidentDataGridColumns: GridColDef<HospitalAccidentInforma
       headerAlign: 'left',
       align: 'left',
       valueGetter: (_, row) => {
-        if (row.camera) return row.camera.content;
-        if (row.mike) return row.mike.content;
+        if (row.camera) return row.camera.content + ' 카메라';
+        if (row.mike) return row.mike.content + ' 마이크';
         return '';
       },
     },
